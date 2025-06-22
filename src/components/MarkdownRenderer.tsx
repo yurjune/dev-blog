@@ -2,6 +2,7 @@
 
 import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import CodeBlock from "@/components/CodeBlock";
 
 interface MarkdownRendererProps {
@@ -61,23 +62,23 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     ),
     // 단락 스타일링
     p: ({ children, ...props }) => (
-      <p className="text-gray-300 leading-relaxed mb-4 last:mb-0" {...props}>
+      <p className="text-white leading-relaxed mb-4 last:mb-0" {...props}>
         {children}
       </p>
     ),
     // 리스트 스타일링
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-6 text-gray-300 mb-4" {...props}>
+      <ul className="list-disc pl-6 text-white mb-4" {...props}>
         {children}
       </ul>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-6 text-gray-300 mb-4" {...props}>
+      <ol className="list-decimal pl-6 text-white mb-4" {...props}>
         {children}
       </ol>
     ),
     li: ({ children, ...props }) => (
-      <li className="text-gray-300 mb-1" {...props}>
+      <li className="text-white mb-1" {...props}>
         {children}
       </li>
     ),
@@ -123,7 +124,12 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {children}
       </td>
     ),
+    hr: () => <hr className="my-4" />,
   };
 
-  return <ReactMarkdown components={components}>{content}</ReactMarkdown>;
+  return (
+    <ReactMarkdown components={components} rehypePlugins={[rehypeRaw]}>
+      {content}
+    </ReactMarkdown>
+  );
 }
