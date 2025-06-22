@@ -16,7 +16,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jerry's Dev Blog",
-  description: "개발자 Jerry의 기술 블로그입니다.",
+  description: "프론트엔드 개발자 Jerry의 기술 블로그입니다.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
