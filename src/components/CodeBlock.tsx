@@ -49,7 +49,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
       )}
       <pre
         ref={preRef}
-        className={`${className} !mt-0 !mb-4 !text-sm`}
+        className={`${className} !mt-0 !mb-4 !text-sm !bg-neutral-800`}
         suppressHydrationWarning
       >
         <code className={className}>{children}</code>

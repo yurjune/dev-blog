@@ -54,7 +54,7 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "w-full bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50 transition-transform duration-300",
+        "w-full backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50 transition-transform duration-300",
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
