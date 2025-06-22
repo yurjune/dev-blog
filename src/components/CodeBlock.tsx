@@ -43,7 +43,7 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
   return (
     <div className="relative">
       {language !== "text" && (
-        <div className="absolute top-0 right-0 bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded-bl-md rounded-tr-md border-l border-t border-gray-700 z-10">
+        <div className="absolute top-0 right-0 bg-neutral-900/80 text-neutral-400 text-xs px-3 py-1.5 rounded-bl-lg font-mono font-medium backdrop-blur-sm">
           {language}
         </div>
       )}
