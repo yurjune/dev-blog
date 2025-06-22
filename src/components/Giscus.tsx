@@ -1,20 +1,7 @@
 "use client";
 
+import { GISCUS_CONFIG } from "@/lib/constants";
 import { useEffect } from "react";
-
-interface GiscusProps {
-  repo: string;
-  repoId: string;
-  category: string;
-  categoryId: string;
-  mapping: string;
-  strict: boolean;
-  reactionsEnabled: boolean;
-  emitMetadata: boolean;
-  inputPosition: string;
-  theme: string;
-  lang: string;
-}
 
 declare global {
   interface Window {
@@ -22,19 +9,21 @@ declare global {
   }
 }
 
-export default function Giscus({
-  repo,
-  repoId,
-  category,
-  categoryId,
-  mapping,
-  strict,
-  reactionsEnabled,
-  emitMetadata,
-  inputPosition,
-  theme,
-  lang,
-}: GiscusProps) {
+export default function Giscus() {
+  const {
+    repo,
+    repoId,
+    category,
+    categoryId,
+    mapping,
+    strict,
+    reactionsEnabled,
+    emitMetadata,
+    inputPosition,
+    theme,
+    lang,
+  } = GISCUS_CONFIG;
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";

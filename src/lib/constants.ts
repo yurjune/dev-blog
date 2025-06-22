@@ -32,3 +32,30 @@ export const TWITTER_CONFIG = {
   creator: "@jerry_dev", // 실제 트위터 핸들로 변경하세요
   site: "@jerry_dev_blog", // 사이트 트위터 핸들로 변경하세요
 } as const;
+
+interface GiscusProps {
+  repo: string;
+  repoId: string;
+  category: string;
+  categoryId: string;
+  mapping: string;
+  strict: boolean;
+  reactionsEnabled: boolean;
+  emitMetadata: boolean;
+  inputPosition: string;
+  theme: string;
+  lang: string;
+}
+export const GISCUS_CONFIG: GiscusProps = {
+  repo: "yurjune/yurjune.github.io",
+  repoId: process.env.GISCUS_REPO_ID || "",
+  category: "Comments",
+  categoryId: process.env.GISCUS_CATEGORY_ID || "",
+  mapping: "pathname",
+  strict: false,
+  reactionsEnabled: true,
+  emitMetadata: false,
+  inputPosition: "bottom",
+  theme: "dark_tritanopia",
+  lang: "ko",
+} as const;

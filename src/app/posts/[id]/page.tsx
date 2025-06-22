@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Giscus from "@/components/Giscus";
-import { GISCUS_CONFIG } from "@/lib/giscus";
 import { Metadata } from "next";
 import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
 
@@ -113,7 +112,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </article>
 
         <div className="mt-12 pt-8 border-t border-neutral-700 mb-4">
-          <Giscus {...GISCUS_CONFIG} />
+          <Giscus />
         </div>
       </div>
     );
