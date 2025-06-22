@@ -33,7 +33,7 @@ export function PostCard({ post }: PostCardProps) {
                   {post.categories.map((category) => (
                     <span
                       key={category}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-700/50 text-neutral-300 border border-neutral-600/50"
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-neutral-700/50 text-neutral-300 border border-neutral-600/50"
                     >
                       {category}
                     </span>
