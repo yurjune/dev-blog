@@ -116,7 +116,6 @@ export default function Header() {
                     href={item.href}
                     className="text-gray-300 hover:text-white hover:bg-gray-800 block px-3 py-3 rounded-md text-base font-medium transition-colors"
                     onClick={() => {
-                      console.log("Menu item clicked:", item.name);
                       setIsMenuOpen(false);
                     }}
                   >
