@@ -3,6 +3,7 @@ export const SITE_CONFIG = {
   description: "Hello, I'm front-end developer",
   email: "yurjune@naver.com",
   github: "https://github.com/yurjune",
+  domain: "https://jerry-dev.com",
 } as const;
 
 export const SITE_METADATA = {
@@ -24,7 +25,7 @@ export const SITE_METADATA = {
   locale: "ko_KR",
   type: "website",
   image: "/avatar.jpg",
-  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://jerry-dev.com",
+  baseUrl: SITE_CONFIG.domain,
 } as const;
 
 export const TWITTER_CONFIG = {
