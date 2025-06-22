@@ -6,6 +6,7 @@ import html from "remark-html";
 import gfm from "remark-gfm";
 import { format } from "date-fns";
 import markdownToText from "markdown-to-text";
+import readingTime from "reading-time";
 
 export interface Post {
   id: string;
@@ -14,6 +15,7 @@ export interface Post {
   content: string;
   excerpt: string;
   slug: string;
+  readingTime: number;
   categories?: string[];
 }
 
@@ -82,6 +84,7 @@ export function getSortedPostsData(): Post[] {
       const postData = {
         id,
         slug: fileName,
+        readingTime: getReadingTime(matterResult.content),
         ...(matterResult.data as PostMeta),
         content: matterResult.content,
       };
@@ -132,6 +135,7 @@ export async function getPostData(id: string): Promise<Post> {
     slug: id,
     content: contentHtml,
     excerpt,
+    readingTime: getReadingTime(matterResult.content),
     ...(matterResult.data as PostMeta),
   };
 }
@@ -158,6 +162,7 @@ export async function getPostMarkdown(id: string): Promise<Post> {
     slug: id,
     content: processedMarkdown,
     excerpt,
+    readingTime: getReadingTime(matterResult.content),
     ...(matterResult.data as PostMeta),
   };
 }
@@ -196,4 +201,10 @@ export function getPostExcerpt(
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return format(date, "yyyy년 MM월 dd일");
+}
+
+// 읽기 시간을 계산하는 새로운 함수
+export function getReadingTime(content: string): number {
+  const stats = readingTime(content);
+  return Math.ceil(stats.minutes);
 }

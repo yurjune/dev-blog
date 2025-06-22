@@ -44,7 +44,8 @@ export default async function PostPage({ params }: PostPageProps) {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              })}
+              })}{" "}
+              • {post.readingTime}분 읽기
             </div>
             {post.categories && post.categories.length > 0 && (
               <div className="flex flex-wrap gap-2">

@@ -77,7 +77,7 @@ export default async function Home() {
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <CardDescription className="text-neutral-400 mb-2 text-sm font-medium">
-                          {formatDate(post.date)}
+                          {formatDate(post.date)} • {post.readingTime}분 읽기
                         </CardDescription>
                         <CardTitle className="text-neutral-100 text-xl mb-3 font-semibold leading-tight">
                           {post.title}
