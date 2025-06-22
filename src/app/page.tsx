@@ -8,6 +8,7 @@ import { Github, Mail } from "lucide-react";
 import { getSortedPostsData, formatDate } from "@/lib/posts";
 import { SITE_CONFIG } from "@/lib/constants";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Home() {
   const posts = getSortedPostsData();
@@ -20,10 +21,14 @@ export default async function Home() {
           <div className="flex flex-row items-center gap-6">
             {/* 아바타 */}
             <div className="flex-shrink-0">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <span className="text-2xl sm:text-3xl font-bold text-white">
-                  J
-                </span>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden">
+                <Image
+                  src="/avatar.jpg"
+                  alt="Profile Avatar"
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
