@@ -21,9 +21,9 @@ export default async function PostPage({ params }: PostPageProps) {
     const post = await getPostMarkdown(id);
 
     return (
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-4 py-4">
         {/* 뒤로가기 버튼 */}
-        <div className="mb-8">
+        <div className="mb-4 sm:mb-6">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
