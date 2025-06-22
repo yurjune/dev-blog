@@ -6,6 +6,7 @@ import {
 } from "@/components/shadcn-ui/card";
 import { Github, Mail } from "lucide-react";
 import { getSortedPostsData, formatDate } from "@/lib/posts";
+import { SITE_CONFIG } from "@/lib/constants";
 import Link from "next/link";
 
 export default async function Home() {
@@ -29,16 +30,16 @@ export default async function Home() {
             {/* 프로필 정보 */}
             <div className="flex flex-col items-start text-left">
               <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
-                Jerry Park
+                {SITE_CONFIG.name}
               </h1>
               <p className="text-base sm:text-lg text-gray-300 mb-2 max-w-2xl">
-                Hello, I&apos;m front-end developer
+                {SITE_CONFIG.description}
               </p>
 
               {/* 소셜 링크 */}
               <div className="flex gap-4">
                 <a
-                  href="https://github.com/jerrykim"
+                  href={SITE_CONFIG.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
@@ -46,7 +47,7 @@ export default async function Home() {
                   <Github className="h-5 w-5" />
                 </a>
                 <a
-                  href="mailto:jerry@example.com"
+                  href={`mailto:${SITE_CONFIG.email}`}
                   className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <Mail className="h-5 w-5" />
