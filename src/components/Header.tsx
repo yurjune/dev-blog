@@ -23,7 +23,6 @@ export default function Header() {
   ];
 
   const toggleMenu = () => {
-    console.log("Menu toggle clicked, current state:", isMenuOpen);
     setIsMenuOpen(!isMenuOpen);
   };
 
