@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import Giscus from "@/components/Giscus";
+import { GISCUS_CONFIG } from "@/lib/giscus";
 
 interface PostPageProps {
   params: Promise<{
@@ -66,6 +68,10 @@ export default async function PostPage({ params }: PostPageProps) {
         <article className="prose prose-invert prose-lg max-w-none">
           <MarkdownRenderer content={post.content} />
         </article>
+
+        <div className="mt-12 pt-8 border-t border-neutral-700 mb-4">
+          <Giscus {...GISCUS_CONFIG} />
+        </div>
       </div>
     );
   } catch {
