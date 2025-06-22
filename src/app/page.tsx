@@ -61,10 +61,10 @@ export default async function Home() {
         <section className="space-y-6">
           <div className="flex justify-between items-center border-b border-gray-800 pb-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              최근 포스트
+              Recent Posts
             </h2>
-            <span className="text-gray-400 text-md sm:text-lg">
-              총 {posts.length}개의 게시글
+            <span className="text-gray-400 text-md font-bold self-end">
+              Total {posts.length}
             </span>
           </div>
 
