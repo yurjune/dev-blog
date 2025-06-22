@@ -1,5 +1,6 @@
-import { Github, Mail } from "lucide-react";
+import { Github, Mail, User } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -28,6 +29,14 @@ export default function Footer() {
               <Mail className="h-5 w-5" />
               <span className="text-sm">Email</span>
             </a>
+            <Link
+              href="/profile"
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="Profile"
+            >
+              <User className="h-5 w-5" />
+              <span className="text-sm">Profile</span>
+            </Link>
           </div>
 
           {/* 저작권 정보 */}

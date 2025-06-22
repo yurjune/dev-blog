@@ -57,7 +57,6 @@ export default async function Home() {
                   className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <User className="h-5 w-5" />
-                  <span className="text-sm">프로필 보기</span>
                 </Link>
               </div>
             </div>
