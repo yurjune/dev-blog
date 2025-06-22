@@ -18,7 +18,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       if (isInline) {
         return (
           <code
-            className="bg-gray-800 text-rose-400 px-1 py-0.5 rounded text-sm"
+            className="bg-neutral-800 text-rose-400 px-1 py-0.5 rounded text-sm"
             {...props}
           >
             {children}
