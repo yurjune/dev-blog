@@ -135,7 +135,7 @@ leetcode.nvim 을 사용하면서 이미지를 렌더링하려면, [image.nvim](
 
 1. 먼저 brew 로 ghostty cask 를 설치해줍니다.
 
-```
+```text
 brew install ghostty
 ```
 
@@ -155,21 +155,20 @@ return {
 
 3. 마지막으로 imagemagick 을 설치해줍니다! 이것도 brew 를 사용하여 설치합니다.
 
-```
+```text
 brew install imagemagick
 ```
 
-이제 ghostty 에서 이미지가 있는 문제를 열면..! 이미지가 아주 잘 나오는걸 확인하실 수 있습니다~!![image9](image9.png)
+이제 ghostty 에서 이미지가 있는 문제를 열면 이미지가 아주 잘 나오는걸 확인하실 수 있습니다~!![image9](image9.png)
 
 ## 문제 목록 필터링하기
 
-Leetcode 문제를 풀다보면 난이도 별로 필터링할 필요가 있는데,
-
-명령어에 파라미터를 주면, `난이도별`, `상태별`, `태그별` 필터링이 가능합니다.
+Leetcode 문제를 풀다보면 난이도 별로 필터링할 필요가 있는데, 명령어에 파라미터를 주면 `난이도별`, `상태별`, `태그별` 필터링이 가능합니다.
 
 ```lua
 -- 문제 목록 필터링
 Leet list status=<status> difficulty=<difficulty>
+
 -- 랜덤 문제 가져오기 필터링
 Leet random status=<status> difficulty=<difficulty> tags=<tags>
 ```
@@ -177,11 +176,11 @@ Leet random status=<status> difficulty=<difficulty> tags=<tags>
 매번 명령어와 함께 파라미터를 주기 귀찮으니, 단축키를 지정해 놓는 것도 방법입니다.
 
 ```lua
-vim.keymap.set("n", "<leader>llh", function()
+vim.keymap.set("n", "<leader>llm", function()
   vim.api.nvim_command("Leet list difficulty=medium")
 end, { desc = "Leetcode problem list - medium" })
 
-vim.keymap.set("n", "<leader>lrh", function()
+vim.keymap.set("n", "<leader>lrm", function()
   vim.api.nvim_command("Leet random difficulty=medium")
 end, { desc = "Leetcode random problem - medium" })
 ```

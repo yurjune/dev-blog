@@ -11,7 +11,6 @@ draft: false
 ---
 
 Ghostty 터미널을 사용하고 있는데, undercurl을 지원하는 터미널이기 때문에 Neovim에서도 undercurl을 정상적으로 표시할 수 있다.
-
 터미널이 undercurl을 지원하는지는 다음 명령어를 통해 확인할 수 있다.
 
 ```bash
@@ -23,10 +22,9 @@ printf '\e[4:3;58:2:255:0:0mRed undercurl\e[0m\n'
 ```
 
 그러나 터미널에서 undercurl을 지원함에도 불구하고 tmux session으로 Neovim을 실행하면 undercurl이 정상적으로 표시되지 않는다.
-
 구글링 및 AI 를 통해 다음 솔루션을 얻을 수 있었는데, 실제로 문제를 해결하지는 못한다.
 
-```tmux
+```text
 # .tmux.conf
 set -g default-terminal "screen-256color"
 set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
@@ -64,9 +62,9 @@ infocmp > /tmp/${TERM}.ti # /tmp/tmux-256color.ti
 nvim /tmp/${TERM}.ti
 ```
 
-terminfo 파일에 다음 line 추가
+3. terminfo 파일에 다음 line 추가
 
-```
+```text
 # ex) tmux-256color.ti
 
 Smulx=\E[4:%p1%dm,
@@ -78,12 +76,12 @@ Smulx=\E[4:%p1%dm,
 tic -x /tmp/${TERM}.ti
 ```
 
-1. Smulx 가 잘 추가되었는지 확인
+5. Smulx 가 잘 추가되었는지 확인
 
 ```bash
 infocmp -l -x | grep Smulx
 ```
 
-위 설정을 통해 undercurl이 적용된 것을 확인할 수 있다.
+위 설정을 통해 **undercurl**이 적용된 것을 확인할 수 있다.
 
 ![image1](image1.png)
