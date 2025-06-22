@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const menuItems = [
     { name: "Home", href: "/" },
@@ -22,12 +24,40 @@ export default function Header() {
     { name: "Search", href: "/search" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 스크롤 방향에 따라 헤더 표시/숨김
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // 스크롤을 내리고 있고, 100px 이상 스크롤된 경우 헤더 숨김
+        setIsVisible(false);
+      } else {
+        // 스크롤을 올리거나 맨 위에 있는 경우 헤더 표시
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header className="w-full bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
+    <header
+      className={cn(
+        "w-full bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50 transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      )}
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* 로고/블로그 제목 */}
