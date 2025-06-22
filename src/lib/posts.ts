@@ -135,6 +135,32 @@ export async function getPostData(id: string): Promise<Post> {
   };
 }
 
+// 원본 마크다운 내용을 반환하는 새로운 함수
+export async function getPostMarkdown(id: string): Promise<Post> {
+  const fullPath = path.join(postsDirectory, id, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  // gray-matter를 사용하여 포스트의 메타데이터 섹션을 파싱합니다
+  const matterResult = matter(fileContents);
+
+  // 이미지 경로를 절대 경로로 변환
+  const processedMarkdown = processImagePaths(matterResult.content, id);
+
+  // excerpt가 없으면 content에서 생성
+  const excerpt =
+    (matterResult.data as PostMeta).excerpt ||
+    getPostExcerpt(matterResult.content);
+
+  // 포스트 데이터를 id와 결합합니다 (원본 마크다운 반환)
+  return {
+    id,
+    slug: id,
+    content: processedMarkdown,
+    excerpt,
+    ...(matterResult.data as PostMeta),
+  };
+}
+
 export function getPostExcerpt(
   content: string,
   maxLength: number = 150
