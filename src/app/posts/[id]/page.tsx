@@ -5,6 +5,8 @@ import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Giscus from "@/components/Giscus";
 import { GISCUS_CONFIG } from "@/lib/giscus";
+import { Metadata } from "next";
+import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
 
 interface PostPageProps {
   params: Promise<{
@@ -15,6 +17,47 @@ interface PostPageProps {
 export async function generateStaticParams() {
   const paths = getAllPostIds();
   return paths;
+}
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  try {
+    const { id } = await params;
+    const post = await getPostMarkdown(id);
+
+    const postUrl = `${SITE_METADATA.baseUrl}/posts/${id}`;
+
+    return {
+      title: post.title,
+      description: post.excerpt,
+      keywords: post.categories || [],
+      authors: [{ name: SITE_METADATA.author }],
+      openGraph: {
+        title: post.title,
+        description: post.excerpt,
+        type: "article",
+        url: postUrl,
+        publishedTime: post.date,
+        authors: [SITE_METADATA.author],
+        tags: post.categories,
+        images: [SITE_METADATA.image],
+      },
+      twitter: {
+        card: TWITTER_CONFIG.card,
+        title: post.title,
+        description: post.excerpt,
+        images: [SITE_METADATA.image],
+      },
+      alternates: {
+        canonical: postUrl,
+      },
+    };
+  } catch {
+    return {
+      title: "Post Not Found",
+    };
+  }
 }
 
 export default async function PostPage({ params }: PostPageProps) {

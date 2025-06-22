@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,50 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jerry's Dev Blog",
-  description: "프론트엔드 개발자 Jerry의 기술 블로그입니다.",
+  title: {
+    default: SITE_METADATA.title,
+    template: `%s | ${SITE_METADATA.title}`,
+  },
+  description: SITE_METADATA.description,
+  keywords: [...SITE_METADATA.keywords],
+  authors: [{ name: SITE_METADATA.author }],
+  creator: SITE_METADATA.author,
+  publisher: SITE_METADATA.siteName,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(SITE_METADATA.baseUrl),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: SITE_METADATA.type,
+    locale: SITE_METADATA.locale,
+    url: "/",
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.shortDescription,
+    siteName: SITE_METADATA.siteName,
+    images: [SITE_METADATA.image],
+  },
+  twitter: {
+    card: TWITTER_CONFIG.card,
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.shortDescription,
+    images: [SITE_METADATA.image],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       {

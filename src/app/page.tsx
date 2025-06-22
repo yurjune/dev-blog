@@ -1,9 +1,29 @@
 import { Github, Mail, User } from "lucide-react";
 import { getSortedPostsData } from "@/lib/posts";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
 import Link from "next/link";
 import Image from "next/image";
 import { PostCard } from "@/components/PostCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
+  keywords: [...SITE_METADATA.keywords],
+  openGraph: {
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.shortDescription,
+    type: SITE_METADATA.type,
+    url: "/",
+    images: [SITE_METADATA.image],
+  },
+  twitter: {
+    card: TWITTER_CONFIG.card,
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.shortDescription,
+    images: [SITE_METADATA.image],
+  },
+};
 
 export default async function Home() {
   const posts = getSortedPostsData();
