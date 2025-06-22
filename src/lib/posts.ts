@@ -5,6 +5,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import gfm from "remark-gfm";
 import { format } from "date-fns";
+import markdownToText from "markdown-to-text";
 
 export interface Post {
   id: string;
@@ -165,14 +166,31 @@ export function getPostExcerpt(
   content: string,
   maxLength: number = 150
 ): string {
-  // HTML 태그를 제거하고 텍스트만 추출
-  const textContent = content.replace(/<[^>]*>/g, "");
+  // markdown-to-text를 사용하여 마크다운을 순수 텍스트로 변환
+  const textContent = markdownToText(content);
 
-  if (textContent.length <= maxLength) {
-    return textContent;
+  // 여러 공백을 하나로 정리
+  const cleanText = textContent.replace(/\s+/g, " ").trim();
+
+  if (cleanText.length <= maxLength) {
+    return cleanText;
   }
 
-  return textContent.substring(0, maxLength).trim() + "...";
+  // 문장 단위로 자르기 (마침표, 느낌표, 물음표 기준)
+  const sentences = cleanText.match(/[^.!?]+[.!?]+/g);
+  if (sentences && sentences.length > 0) {
+    let result = "";
+    for (const sentence of sentences) {
+      if ((result + sentence).length <= maxLength) {
+        result += sentence;
+      } else {
+        break;
+      }
+    }
+    return result.trim() || cleanText.substring(0, maxLength).trim() + "...";
+  }
+
+  return cleanText.substring(0, maxLength).trim() + "...";
 }
 
 export function formatDate(dateString: string): string {
