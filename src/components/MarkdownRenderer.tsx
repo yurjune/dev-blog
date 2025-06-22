@@ -45,7 +45,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     ),
     // 제목 스타일링
     h1: ({ children, ...props }) => (
-      <h1 className="text-3xl font-bold text-white mb-6 mt-8" {...props}>
+      <h1 className="text-3xl font-bold text-white mb-4 mt-8" {...props}>
         {children}
       </h1>
     ),
@@ -61,18 +61,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     ),
     // 단락 스타일링
     p: ({ children, ...props }) => (
-      <p className="text-gray-300 leading-relaxed mb-6 last:mb-0" {...props}>
+      <p className="text-gray-300 leading-relaxed mb-4 last:mb-0" {...props}>
         {children}
       </p>
     ),
     // 리스트 스타일링
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-6 text-gray-300 mb-6" {...props}>
+      <ul className="list-disc pl-6 text-gray-300 mb-4" {...props}>
         {children}
       </ul>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-6 text-gray-300 mb-6" {...props}>
+      <ol className="list-decimal pl-6 text-gray-300 mb-4" {...props}>
         {children}
       </ol>
     ),
@@ -84,7 +84,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     // 인용구 스타일링
     blockquote: ({ children, ...props }) => (
       <blockquote
-        className="border-l-4 border-neutral-600 bg-neutral-800 p-4 italic text-gray-400 mb-6"
+        className="border-l-4 border-neutral-600 bg-neutral-800 p-4 italic text-gray-400 mb-4"
         {...props}
       >
         {children}
@@ -95,13 +95,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       <img
         src={src}
         alt={alt}
-        className="max-w-full h-auto rounded-lg shadow-lg my-6"
+        className="max-w-full h-auto rounded-lg shadow-lg my-4"
         {...props}
       />
     ),
     // 테이블 스타일링
     table: ({ children, ...props }) => (
-      <div className="overflow-x-auto mb-6">
+      <div className="overflow-x-auto mb-4">
         <table
           className="w-full border-collapse border border-gray-600"
           {...props}
