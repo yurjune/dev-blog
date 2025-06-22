@@ -58,7 +58,7 @@ export default function Header() {
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* 로고/블로그 제목 */}
           <div className="flex-shrink-0">
@@ -109,7 +109,7 @@ export default function Header() {
         {/* 모바일 메뉴 */}
         {isMenuOpen && (
           <div className="sm:hidden border-t border-gray-800 bg-black/95 backdrop-blur-sm absolute top-full left-0 right-0 z-50">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="py-4 space-y-2">
                 {menuItems.map((item) => (
                   <Link

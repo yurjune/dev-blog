@@ -12,7 +12,7 @@ export default async function Home() {
   const posts = getSortedPostsData();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="max-w-3xl mx-auto px-4 py-4">
       <div className="space-y-6 sm:space-y-12">
         {/* 프로필 섹션 */}
         <section className="py-4">
