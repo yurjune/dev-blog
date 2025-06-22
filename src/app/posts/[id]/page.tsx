@@ -5,9 +5,9 @@ import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: PostPageProps) {
   try {
-    const post = await getPostMarkdown(params.id);
+    const { id } = await params;
+    const post = await getPostMarkdown(id);
 
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
