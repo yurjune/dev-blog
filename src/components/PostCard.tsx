@@ -22,7 +22,7 @@ export function PostCard({ post }: PostCardProps) {
               <CardDescription className="text-neutral-400 mb-2 text-sm font-medium">
                 {formatDate(post.date)} • {post.readingTime}분 읽기
               </CardDescription>
-              <CardTitle className="text-neutral-100 text-xl mb-3 font-semibold leading-tight line-clamp-2">
+              <CardTitle className="text-neutral-100 text-2xl mb-3 font-semibold leading-tight line-clamp-2">
                 {post.title}
               </CardTitle>
               <p className="text-neutral-300 text-base leading-relaxed line-clamp-4">
