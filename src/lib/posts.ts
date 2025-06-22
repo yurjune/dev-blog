@@ -4,7 +4,6 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import gfm from "remark-gfm";
-import { format } from "date-fns";
 import markdownToText from "markdown-to-text";
 import { getReadingTime } from "./utils";
 
@@ -196,9 +195,4 @@ export function getPostExcerpt(
   }
 
   return cleanText.substring(0, maxLength).trim() + "...";
-}
-
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return format(date, "yyyy년 MM월 dd일");
 }
