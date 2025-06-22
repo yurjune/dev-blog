@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn-ui/card";
-import { Github, Mail } from "lucide-react";
+import { Github, Mail, User } from "lucide-react";
 import { getSortedPostsData, formatDate } from "@/lib/posts";
 import { SITE_CONFIG } from "@/lib/constants";
 import Link from "next/link";
@@ -57,6 +57,13 @@ export default async function Home() {
                 >
                   <Mail className="h-5 w-5" />
                 </a>
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  <User className="h-5 w-5" />
+                  <span className="text-sm">프로필 보기</span>
+                </Link>
               </div>
             </div>
           </div>

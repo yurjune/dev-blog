@@ -6,7 +6,7 @@ import html from "remark-html";
 import gfm from "remark-gfm";
 import { format } from "date-fns";
 import markdownToText from "markdown-to-text";
-import readingTime from "reading-time";
+import { getReadingTime } from "./utils";
 
 export interface Post {
   id: string;
@@ -201,10 +201,4 @@ export function getPostExcerpt(
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return format(date, "yyyy년 MM월 dd일");
-}
-
-// 읽기 시간을 계산하는 새로운 함수
-export function getReadingTime(content: string): number {
-  const stats = readingTime(content);
-  return Math.ceil(stats.minutes);
 }
