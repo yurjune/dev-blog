@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
-      <div className="space-y-6 sm:space-y-12">
+      <div className="space-y-6 sm:space-y-8">
         {/* 프로필 섹션 */}
         <section className="py-4">
           <div className="flex flex-row items-center gap-6">
@@ -28,10 +28,10 @@ export default async function Home() {
 
             {/* 프로필 정보 */}
             <div className="flex flex-col items-start text-left">
-              <h1 className="text-xl sm:text-2xl font-bold text-white mb-3">
+              <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
                 Jerry Park
               </h1>
-              <p className="text-base sm:text-lg text-gray-300 mb-4 max-w-2xl">
+              <p className="text-base sm:text-lg text-gray-300 mb-2 max-w-2xl">
                 Hello, I&apos;m front-end developer
               </p>
 
@@ -62,7 +62,9 @@ export default async function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white">
               최근 포스트
             </h2>
-            <span className="text-gray-400">총 {posts.length}개의 게시글</span>
+            <span className="text-gray-400 text-md sm:text-lg">
+              총 {posts.length}개의 게시글
+            </span>
           </div>
 
           <div className="space-y-4">
