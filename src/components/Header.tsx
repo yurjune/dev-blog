@@ -9,7 +9,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/shadcn-ui/navigation-menu";
-import { Button } from "@/components/shadcn-ui/button";
+import { HeaderButton } from "@/components/HeaderButton";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -66,18 +66,13 @@ export default function Header() {
 
           {/* 모바일 메뉴 버튼 */}
           <div className="sm:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMenu}
-              className="text-gray-300 hover:text-white hover:bg-gray-800 h-10 w-10"
-            >
+            <HeaderButton onClick={toggleMenu} className="h-10 w-10">
               {isMenuOpen ? (
                 <X className="h-5 w-5" />
               ) : (
                 <Menu className="h-5 w-5" />
               )}
-            </Button>
+            </HeaderButton>
           </div>
         </div>
 
