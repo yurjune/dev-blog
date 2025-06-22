@@ -78,7 +78,7 @@ export default function Header() {
                     asChild
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-gray-300 hover:text-white hover:bg-gray-800 text-base"
+                      "bg-transparent text-gray-300 hover:text-white hover:bg-neutral-800 text-base"
                     )}
                   >
                     <Link href={item.href}>{item.name}</Link>
