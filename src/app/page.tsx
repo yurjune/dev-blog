@@ -1,54 +1,15 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn-ui/card";
 import { Github, Mail } from "lucide-react";
+import { getSortedPostsData, formatDate } from "@/lib/posts";
+import Link from "next/link";
 
-export default function Home() {
-  const posts = [
-    {
-      id: 1,
-      title: "Next.js 15 새로운 기능들",
-      description:
-        "Next.js 15에서 추가된 새로운 기능들과 개선사항을 살펴봅니다.",
-      date: "2024.01.15",
-      tags: ["Next.js", "React"],
-    },
-    {
-      id: 2,
-      title: "TypeScript 고급 타입 활용법",
-      description:
-        "TypeScript의 고급 타입 기능들을 실제 프로젝트에서 어떻게 활용하는지 알아봅니다.",
-      date: "2024.01.12",
-      tags: ["TypeScript", "JavaScript"],
-    },
-    {
-      id: 3,
-      title: "Tailwind CSS 커스터마이징",
-      description:
-        "Tailwind CSS를 프로젝트에 맞게 커스터마이징하는 방법을 소개합니다.",
-      date: "2024.01.10",
-      tags: ["CSS", "Tailwind"],
-    },
-    {
-      id: 4,
-      title: "React 상태 관리 패턴",
-      description: "React에서 효율적인 상태 관리 패턴들을 정리해봅니다.",
-      date: "2024.01.08",
-      tags: ["React", "State Management"],
-    },
-    {
-      id: 5,
-      title: "웹 성능 최적화 기법",
-      description:
-        "웹 애플리케이션의 성능을 최적화하는 다양한 기법들을 소개합니다.",
-      date: "2024.01.05",
-      tags: ["Performance", "Web"],
-    },
-  ];
+export default async function Home() {
+  const posts = getSortedPostsData();
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -106,38 +67,41 @@ export default function Home() {
 
           <div className="space-y-4">
             {posts.map((post) => (
-              <Card
+              <Link
                 key={post.id}
-                className="bg-gray-900 border-gray-800 hover:bg-gray-800 transition-colors cursor-pointer"
+                className="block"
+                href={`/posts/${post.slug}`}
               >
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <CardDescription className="text-gray-400 mb-2">
-                        {post.date}
-                      </CardDescription>
-                      <CardTitle className="text-white text-xl mb-3">
-                        {post.title}
-                      </CardTitle>
-                      <p className="text-gray-300 text-base">
-                        {post.description}
-                      </p>
+                <Card className="bg-neutral-800/50 border-neutral-700/50 hover:bg-neutral-700/50 hover:border-neutral-600/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md backdrop-blur-sm">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <CardDescription className="text-neutral-400 mb-2 text-sm font-medium">
+                          {formatDate(post.date)}
+                        </CardDescription>
+                        <CardTitle className="text-neutral-100 text-xl mb-3 font-semibold leading-tight">
+                          {post.title}
+                        </CardTitle>
+                        <p className="text-neutral-300 text-base leading-relaxed">
+                          {post.excerpt}
+                        </p>
+                        {post.categories && post.categories.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {post.categories.map((category) => (
+                              <span
+                                key={category}
+                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-700/50 text-neutral-300 border border-neutral-600/50"
+                              >
+                                {category}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex gap-2 flex-wrap">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs bg-blue-600 text-white px-2 py-1 rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>
