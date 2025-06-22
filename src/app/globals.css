@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
+  --background: #09090b; /* neutral-950 */
   --foreground: #ededed;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09090b;
+    --background: #09090b; /* neutral-950 */
     --foreground: #ededed;
   }
 }
@@ -29,4 +29,40 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* 코드블록 스크롤바 스타일링 */
+pre {
+  scrollbar-width: thin;
+  scrollbar-color: #404040 #171717; /* neutral-700, neutral-900 */
+}
+
+/* Webkit 브라우저용 스크롤바 스타일링 */
+pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: #171717; /* neutral-900 */
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #404040; /* neutral-700 */
+  border-radius: 4px;
+  border: 1px solid #374151; /* neutral-800 */
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: #525252; /* neutral-600 */
+}
+
+pre::-webkit-scrollbar-thumb:active {
+  background: #737373; /* neutral-500 */
+}
+
+/* 가로 스크롤바만 적용 */
+pre::-webkit-scrollbar:vertical {
+  width: 0;
 }
