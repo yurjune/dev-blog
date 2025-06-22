@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,36 +15,12 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const isVisible = useHeaderVisibility();
 
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Profile", href: "/profile" },
   ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // 스크롤 방향에 따라 헤더 표시/숨김
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // 스크롤을 내리고 있고, 100px 이상 스크롤된 경우 헤더 숨김
-        setIsVisible(false);
-      } else {
-        // 스크롤을 올리거나 맨 위에 있는 경우 헤더 표시
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -129,4 +105,26 @@ export default function Header() {
       </div>
     </header>
   );
+}
+
+function useHeaderVisibility() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const shouldHide = currentScrollY > lastScrollY && currentScrollY > 100;
+      setIsVisible(!shouldHide);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
+  return isVisible;
 }
