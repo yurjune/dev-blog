@@ -82,7 +82,7 @@ export default function Header() {
         </div>
 
         {/* 모바일 메뉴 */}
-        {isMenuOpen && (
+        {isMenuOpen && isVisible && (
           <div className="sm:hidden border-t border-gray-800 bg-black/95 backdrop-blur-lg absolute top-full left-0 right-0 z-50">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="py-4 space-y-2">
