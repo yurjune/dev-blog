@@ -46,22 +46,28 @@ function processImagePaths(content: string, postId: string): string {
       }
       // 상대 경로인 경우 절대 경로로 변환
       return `![${alt}](/posts/${postId}/${imagePath})`;
-    }
+    },
   );
 }
 
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
+  const isDirectory = (fileName: string) => {
+    return fs.statSync(path.join(postsDirectory, fileName)).isDirectory();
+  };
+  const isPublished = (fileName: string) => {
+    const fullPath = path.join(postsDirectory, fileName, `${fileName}.md`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const matterResult = matter(fileContents);
+    return !(matterResult.data as PostMeta).draft;
+  };
+
   return fileNames
-    .filter((fileName) => {
-      const fullPath = path.join(postsDirectory, fileName);
-      return fs.statSync(fullPath).isDirectory();
-    })
+    .filter(isDirectory)
+    .filter(isPublished)
     .map((fileName) => {
       return {
-        params: {
-          id: fileName,
-        },
+        params: { id: fileName },
       };
     });
 }
@@ -100,7 +106,8 @@ export function getSortedPostsData(): Post[] {
       }
 
       return postData as Post;
-    });
+    })
+    .filter((post) => !post.draft);
 
   // 날짜별로 정렬합니다
   return allPostsData.sort((a, b) => {
@@ -174,7 +181,7 @@ export async function getPostMarkdown(id: string): Promise<Post> {
 
 export function getPostExcerpt(
   content: string,
-  maxLength: number = 150
+  maxLength: number = 150,
 ): string {
   // markdown-to-text를 사용하여 마크다운을 순수 텍스트로 변환
   const textContent = markdownToText(content);

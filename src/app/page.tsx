@@ -9,8 +9,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {};
 
 export default async function Home() {
-  const sortedPosts = getSortedPostsData();
-  const posts = sortedPosts.filter((post) => !post.draft);
+  const posts = getSortedPostsData();
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
