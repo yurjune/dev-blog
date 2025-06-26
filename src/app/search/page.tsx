@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default async function SearchPage() {
   // 빌드 타임에 posts 데이터 로드
-  const posts = getSortedPostsData();
-  const postSummaries = posts.map((post) => ({
+  const sortedPosts = getSortedPostsData();
+  const postSummaries = sortedPosts.map((post) => ({
     id: post.id,
     title: post.title,
     content: "",
@@ -25,5 +25,7 @@ export default async function SearchPage() {
     draft: post.draft ?? false,
   }));
 
-  return <Search initialPosts={postSummaries} />;
+  const posts = postSummaries.filter((post) => !post.draft);
+
+  return <Search initialPosts={posts} />;
 }
