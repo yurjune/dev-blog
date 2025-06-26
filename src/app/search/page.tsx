@@ -1,0 +1,26 @@
+import { Search } from "@/components/Search";
+import { Metadata } from "next";
+import { SITE_METADATA } from "@/lib/constants";
+import { getSortedPostsData } from "@/lib/posts";
+
+export const metadata: Metadata = {
+  title: `Search - ${SITE_METADATA.title}`,
+  description: "Search through all blog posts",
+};
+
+export default async function SearchPage() {
+  // 빌드 타임에 posts 데이터 로드
+  const posts = getSortedPostsData();
+  const postSummaries = posts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    content: "",
+    date: post.date,
+    excerpt: post.excerpt,
+    slug: post.slug,
+    readingTime: post.readingTime,
+    categories: post.categories ?? [],
+  }));
+
+  return <Search initialPosts={postSummaries} />;
+}

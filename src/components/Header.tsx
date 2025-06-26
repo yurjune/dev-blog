@@ -20,6 +20,7 @@ export default function Header() {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Profile", href: "/profile" },
+    { name: "Search", href: "/search" },
   ];
 
   const toggleMenu = () => {
