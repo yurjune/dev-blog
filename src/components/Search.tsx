@@ -5,6 +5,7 @@ import { Search as SearchIcon } from "lucide-react";
 import { Input } from "@/components/shadcn-ui/input";
 import { PostCard } from "@/components/PostCard";
 import { Post } from "@/lib/posts";
+import { useDebounce } from "@/lib/hooks";
 
 interface SearchProps {
   initialPosts: Post[];
@@ -13,10 +14,12 @@ interface SearchProps {
 export function Search({ initialPosts }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredPosts = useMemo(() => {
-    if (!searchTerm.trim()) return initialPosts;
+  const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
-    const searchLower = searchTerm.toLowerCase();
+  const filteredPosts = useMemo(() => {
+    if (!debouncedSearchTerm.trim()) return initialPosts;
+
+    const searchLower = debouncedSearchTerm.toLowerCase();
     return initialPosts.filter(({ title, excerpt, categories }) => {
       return (
         title.toLowerCase().includes(searchLower) ||
@@ -26,7 +29,7 @@ export function Search({ initialPosts }: SearchProps) {
         )
       );
     });
-  }, [initialPosts, searchTerm]);
+  }, [initialPosts, debouncedSearchTerm]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
@@ -55,12 +58,18 @@ export function Search({ initialPosts }: SearchProps) {
           {filteredPosts.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-gray-400 text-lg">
-                {searchTerm ? "검색 결과가 없습니다." : "게시글이 없습니다."}
+                {debouncedSearchTerm
+                  ? "검색 결과가 없습니다."
+                  : "게시글이 없습니다."}
               </p>
             </div>
           ) : (
             filteredPosts.map((post) => (
-              <PostCard key={post.id} post={post} searchTerm={searchTerm} />
+              <PostCard
+                key={post.id}
+                post={post}
+                searchTerm={debouncedSearchTerm}
+              />
             ))
           )}
         </div>
