@@ -30,17 +30,14 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
               <p className="text-neutral-300 text-base leading-relaxed line-clamp-4">
                 <HighlightedText text={post.excerpt} searchTerm={searchTerm} />
               </p>
-              {post.categories && post.categories.length > 0 && (
+              {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {post.categories.map((category) => (
+                  {post.tags.map((tag) => (
                     <span
-                      key={category}
+                      key={tag}
                       className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-neutral-700/50 text-neutral-300 border border-neutral-600/50"
                     >
-                      <HighlightedText
-                        text={category}
-                        searchTerm={searchTerm}
-                      />
+                      <HighlightedText text={tag} searchTerm={searchTerm} />
                     </span>
                   ))}
                 </div>

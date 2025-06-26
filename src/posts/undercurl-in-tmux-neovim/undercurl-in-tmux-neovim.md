@@ -2,9 +2,8 @@
 date: "2025-06-08T23:50:00+09:00"
 title: "Tmux + Neovim에서 undercurl이 적용되지 않는 문제 해결하기"
 slug: "undercurl-in-tmux-neovim"
-categories: ["Neovim"]
 image: "image1.png"
-tags: ["Neovim", "tmux"]
+tags: ["Neovim"]
 keywords: ["Neovim", "tmux"]
 comments: true
 draft: false

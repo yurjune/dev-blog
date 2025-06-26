@@ -18,7 +18,6 @@ export default async function SearchPage() {
     excerpt: post.excerpt,
     slug: post.slug,
     readingTime: post.readingTime,
-    categories: post.categories ?? [],
     tags: post.tags ?? [],
     keywords: post.keywords ?? [],
     draft: post.draft ?? false,

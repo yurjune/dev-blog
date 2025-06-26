@@ -15,7 +15,6 @@ export interface Post {
   excerpt: string;
   slug: string;
   readingTime: number;
-  categories?: string[];
   tags?: string[];
   keywords?: string[];
   draft?: boolean;
@@ -25,7 +24,6 @@ export interface PostMeta {
   title: string;
   date: string;
   excerpt?: string;
-  categories?: string[];
   tags?: string[];
   keywords?: string[];
   draft?: boolean;
@@ -46,7 +44,7 @@ function processImagePaths(content: string, postId: string): string {
       }
       // 상대 경로인 경우 절대 경로로 변환
       return `![${alt}](/posts/${postId}/${imagePath})`;
-    },
+    }
   );
 }
 
@@ -181,7 +179,7 @@ export async function getPostMarkdown(id: string): Promise<Post> {
 
 export function getPostExcerpt(
   content: string,
-  maxLength: number = 150,
+  maxLength: number = 150
 ): string {
   // markdown-to-text를 사용하여 마크다운을 순수 텍스트로 변환
   const textContent = markdownToText(content);

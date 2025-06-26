@@ -2,9 +2,8 @@
 date: "2025-05-05T02:50:15+09:00"
 title: "Neovim에서 Leetcode 문제를 풀어보자!"
 slug: "leetcode-in-neovim"
-categories: ["Neovim"]
 image: "image5.png"
-tags: ["Neovim", "Leetcode"]
+tags: ["Neovim"]
 keywords: ["Neovim", "Leetcode"]
 comments: true
 draft: false

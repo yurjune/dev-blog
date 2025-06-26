@@ -21,13 +21,11 @@ export function Search({ initialPosts }: SearchProps) {
     if (!debouncedSearchTerm.trim()) return initialPosts;
 
     const searchLower = debouncedSearchTerm.toLowerCase();
-    return initialPosts.filter(({ title, excerpt, categories }) => {
+    return initialPosts.filter(({ title, excerpt, tags }) => {
       return (
         title.toLowerCase().includes(searchLower) ||
         excerpt.toLowerCase().includes(searchLower) ||
-        (categories ?? []).some((cat) =>
-          cat.toLowerCase().includes(searchLower)
-        )
+        (tags ?? []).some((tag) => tag.toLowerCase().includes(searchLower))
       );
     });
   }, [initialPosts, debouncedSearchTerm]);

@@ -2,8 +2,7 @@
 date: "2025-06-25T00:00:00+09:00"
 title: "클라이언트에서 안전한 자동 저장 기능을 구현해보자!"
 slug: "implement-auto-save-function"
-categories: ["Frontend", "React", "Typescript"]
-tags: ["Frontend", "React", "Typescript"]
+tags: ["React", "Typescript"]
 keywords: ["Frontend", "React", "Typescript"]
 comments: true
 draft: false
@@ -26,13 +25,13 @@ draft: false
 
 1. 입력 직후, `{N}ms` 동안 입력 이벤트가 발생하지 않을 때 저장 수행 (디바운싱)
 2. 저장이 진행 중일 때 새로운 입력 요청이 들어오면 보관하였다가 저장 완료 후 수행 (동시성 관리)
-    - 저장하지 않고 유실되는 데이터가 생기거나, 저장 순서가 꼬여 데이터가 꼬이는 일이 없도록 보장
+   - 저장하지 않고 유실되는 데이터가 생기거나, 저장 순서가 꼬여 데이터가 꼬이는 일이 없도록 보장
 
 이후 위 규칙을 만족하는 자동 저장 인터페이스를 제공하는 클래스가 **어떤 상태**를 가져야할지 생각해보았다.
 
-1. debounce를 위한 NodeJS Timer를 저장할 상태 
+1. debounce를 위한 NodeJS Timer를 저장할 상태
 2. debounce 타임을 저장할 상태
-    - 외부에서 값을 설정하기 위해 생성자 매개변수로 받는다.
+   - 외부에서 값을 설정하기 위해 생성자 매개변수로 받는다.
 3. 저장 중 여부에 대한 boolean 상태
 4. 저장 중에 들어오는 새 저장 요청을 보관할 상태
 
@@ -40,11 +39,11 @@ draft: false
 
 ```typescript
 class TaskRunner<T> {
-    private debouncedTimer: NodeJS.Timeout | null = null;
-    private isRunning: boolean = false;
-    private bufferedTask: Task<T> | null = null;
+  private debouncedTimer: NodeJS.Timeout | null = null;
+  private isRunning: boolean = false;
+  private bufferedTask: Task<T> | null = null;
 
-    constructor(private readonly debounceMs: number = 0) {}
+  constructor(private readonly debounceMs: number = 0) {}
 }
 ```
 
@@ -59,18 +58,18 @@ class TaskRunner<T> {
 
 ```typescript
 interface Task<T> {
-    run: () => Promise<T>;
-    onComplete?: (result: T) => void;
+  run: () => Promise<T>;
+  onComplete?: (result: T) => void;
 }
 
 class TaskRunner<T> {
-    // ...
+  // ...
 
-    public async schedule(task: Task<T>): Promise<void> {}
+  public async schedule(task: Task<T>): Promise<void> {}
 
-    private async execute(task: Task<T>): Promise<void> {}
+  private async execute(task: Task<T>): Promise<void> {}
 
-    private reset() {}
+  private reset() {}
 }
 ```
 
@@ -78,23 +77,23 @@ class TaskRunner<T> {
 
 ```typescript
 interface Task<T> {
-    run: () => Promise<T>;
-    onComplete?: (result: T) => void;
-    // other actions..
+  run: () => Promise<T>;
+  onComplete?: (result: T) => void;
+  // other actions..
 }
 
 class TaskRunner<T> {
-    private debouncedTimer: NodeJS.Timeout | null = null;
-    private isRunning: boolean = false;
-    private bufferedTask: Task<T> | null = null;
+  private debouncedTimer: NodeJS.Timeout | null = null;
+  private isRunning: boolean = false;
+  private bufferedTask: Task<T> | null = null;
 
-    constructor(private readonly debounceMs: number = 0) {}
+  constructor(private readonly debounceMs: number = 0) {}
 
-    public async schedule(task: Task<T>): Promise<void> {}
+  public async schedule(task: Task<T>): Promise<void> {}
 
-    private async execute(task: Task<T>): Promise<void> {}
+  private async execute(task: Task<T>): Promise<void> {}
 
-    private reset() {}
+  private reset() {}
 }
 ```
 
@@ -107,13 +106,13 @@ schedule 메서드는 무엇을 해야할까? 들어온 저장 요청을 n초 �
 
 ```typescript
 class TaskRunner<T> {
-    public async schedule(task: Task<T>): Promise<void> {
-        // 1. 타이머 상태에 타이머가 존재하는지 확인 후 존재한다면 타이머를 clear
+  public async schedule(task: Task<T>): Promise<void> {
+    // 1. 타이머 상태에 타이머가 존재하는지 확인 후 존재한다면 타이머를 clear
 
-        return new Promise((res, rej) => {
-            // 2. setTimeout API를 이용하여 this.runTask 호출을 예약
-        })
-    }
+    return new Promise((res, rej) => {
+      // 2. setTimeout API를 이용하여 this.runTask 호출을 예약
+    });
+  }
 }
 ```
 
@@ -143,28 +142,26 @@ class TaskRunner<T> {
 ## 실제 사용 사례
 
 해당 클래스를 사용하여 실제 자동 저장을 구현하는 사례를 살펴보자.
-유저의 입력 직후 저장을 시도하므로 input 태그의 onChange 핸들러에서 인스턴스의 schedule 메서드를 호출하기만 하면 된다. 
+유저의 입력 직후 저장을 시도하므로 input 태그의 onChange 핸들러에서 인스턴스의 schedule 메서드를 호출하기만 하면 된다.
 
 ```typescript
 const taskRunnerRef = useRef(new TaskRunner<Value[]>(1000));
 
 const handleChangeInput = async () => {
-    await taskRunnerRef.current.schedule({
-        run: () => {
-            // ..
-            await onSave(formValues);
-        },
-        onComplete: () => {
-            // ..
-            increaseSaveCount();
-            toast.success('Saved success.');
-        }
-    });
-}
+  await taskRunnerRef.current.schedule({
+    run: () => {
+      // ..
+      await onSave(formValues);
+    },
+    onComplete: () => {
+      // ..
+      increaseSaveCount();
+      toast.success("Saved success.");
+    },
+  });
+};
 
-return (
-    <Input onChange={handleChangeInput} />
-)
+return <Input onChange={handleChangeInput} />;
 ```
 
 ## 태스크 예약 방식 개선
@@ -191,4 +188,3 @@ return (
 클라이언트를 개발하다보면 비슷한 요구사항을 자주 마주할 수 있는데, 자동 저장 이외에도 '검색 API 호출', '파일 순차 업로드' 등이 있다.
 일반적인 작업이라면 단순한 디바운스만으로도 요구사항을 처리할 수 있겠지만, 자동 저장과 같이 race condition이 절대 일어나지 않아야 하는 상황이라면 얘기가 다르다.
 이외에도 에러 핸들링, 태스크 실행 실패 시 재시도 매커니즘 등의 기능을 추가로 구현해볼 수 있을 듯 하다:)
-
