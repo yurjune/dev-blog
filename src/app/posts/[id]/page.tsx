@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Giscus from "@/components/Giscus";
 import { Metadata } from "next";
-import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
+import { SITE_METADATA } from "@/lib/constants";
 
 interface PostPageProps {
   params: Promise<{
@@ -30,23 +30,19 @@ export async function generateMetadata({
     return {
       title: post.title,
       description: post.excerpt,
-      keywords: post.categories || [],
-      authors: [{ name: SITE_METADATA.author }],
+      keywords: post.keywords || [],
       openGraph: {
         title: post.title,
         description: post.excerpt,
+        tags: post.tags,
         type: "article",
         url: postUrl,
         publishedTime: post.date,
         authors: [SITE_METADATA.author],
-        tags: post.categories,
-        images: [SITE_METADATA.image],
       },
       twitter: {
-        card: TWITTER_CONFIG.card,
         title: post.title,
         description: post.excerpt,
-        images: [SITE_METADATA.image],
       },
       alternates: {
         canonical: postUrl,

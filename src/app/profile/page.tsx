@@ -1,10 +1,10 @@
 import { getProfileData } from "@/lib/profile";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Metadata } from "next";
-import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
+import { SITE_METADATA } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Profile - ${SITE_METADATA.title}`,
+  title: "Profile",
   description: "프론트엔드 개발자 박용헌의 프로필과 경력 정보를 확인하세요.",
   keywords: [...SITE_METADATA.keywords, "프로필", "경력", "소개"],
   openGraph: {
@@ -12,13 +12,10 @@ export const metadata: Metadata = {
     description: "프론트엔드 개발자 박용헌의 프로필과 경력 정보를 확인하세요.",
     type: "profile",
     url: `${SITE_METADATA.baseUrl}/profile`,
-    images: [SITE_METADATA.image],
   },
   twitter: {
-    card: TWITTER_CONFIG.card,
     title: `Profile - ${SITE_METADATA.title}`,
     description: "프론트엔드 개발자 박용헌의 프로필과 경력 정보를 확인하세요.",
-    images: [SITE_METADATA.image],
   },
 };
 

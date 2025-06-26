@@ -37,7 +37,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: SITE_METADATA.type,
     locale: SITE_METADATA.locale,
-    url: "/",
     title: SITE_METADATA.title,
     description: SITE_METADATA.shortDescription,
     siteName: SITE_METADATA.siteName,

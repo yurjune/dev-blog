@@ -1,10 +1,9 @@
 import { Search } from "@/components/Search";
 import { Metadata } from "next";
-import { SITE_METADATA } from "@/lib/constants";
 import { getSortedPostsData } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: `Search - ${SITE_METADATA.title}`,
+  title: "Search",
   description: "Search through all blog posts",
 };
 
