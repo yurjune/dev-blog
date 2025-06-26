@@ -59,7 +59,9 @@ export function Search({ initialPosts }: SearchProps) {
               </p>
             </div>
           ) : (
-            filteredPosts.map((post) => <PostCard key={post.id} post={post} />)
+            filteredPosts.map((post) => (
+              <PostCard key={post.id} post={post} searchTerm={searchTerm} />
+            ))
           )}
         </div>
       </div>
