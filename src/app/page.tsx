@@ -4,6 +4,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import Link from "next/link";
 import Image from "next/image";
 import { PostCard } from "@/components/PostCard";
+import { PageHeader } from "@/components/PageHeader";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {};
@@ -67,14 +68,10 @@ export default async function Home() {
         </section>
 
         <section className="space-y-6">
-          <div className="flex justify-between items-center border-b border-gray-800 pb-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Recent Posts
-            </h2>
-            <span className="text-gray-400 text-md font-bold self-end">
-              Total {posts.length}
-            </span>
-          </div>
+          <PageHeader
+            title="Recent Posts"
+            rightContent={`Total ${posts.length}`}
+          />
 
           <div className="space-y-4">
             {posts.map((post) => (

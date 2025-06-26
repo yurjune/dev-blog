@@ -1,5 +1,6 @@
 import { getProfileData } from "@/lib/profile";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { PageHeader } from "@/components/PageHeader";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 
@@ -25,9 +26,7 @@ export default async function ProfilePage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
       <div className="space-y-6">
-        <div className="flex justify-between items-center border-b border-gray-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Profile</h2>
-        </div>
+        <PageHeader title="Profile" />
 
         <article className="prose prose-invert prose-lg max-w-none">
           <MarkdownRenderer content={profile.content} />

@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Search as SearchIcon } from "lucide-react";
 import { Input } from "@/components/shadcn-ui/input";
 import { PostCard } from "@/components/PostCard";
+import { PageHeader } from "@/components/PageHeader";
 import { Post } from "@/lib/posts";
 import { useDebounce } from "@/lib/hooks";
 
@@ -25,7 +26,7 @@ export function Search({ initialPosts }: SearchProps) {
         title.toLowerCase().includes(searchLower) ||
         excerpt.toLowerCase().includes(searchLower) ||
         (categories ?? []).some((cat) =>
-          cat.toLowerCase().includes(searchLower),
+          cat.toLowerCase().includes(searchLower)
         )
       );
     });
@@ -34,14 +35,10 @@ export function Search({ initialPosts }: SearchProps) {
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
       <div className="space-y-6">
-        <div className="flex justify-between items-center border-b border-gray-800 pb-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Search Posts
-          </h2>
-          <span className="text-gray-400 text-md font-bold self-end">
-            {filteredPosts.length} of {initialPosts.length}
-          </span>
-        </div>
+        <PageHeader
+          title="Search Posts"
+          rightContent={`${filteredPosts.length} of ${initialPosts.length}`}
+        />
 
         <div className="relative">
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
