@@ -20,6 +20,9 @@ export default async function SearchPage() {
     slug: post.slug,
     readingTime: post.readingTime,
     categories: post.categories ?? [],
+    tags: post.tags ?? [],
+    keywords: post.keywords ?? [],
+    draft: post.draft ?? false,
   }));
 
   return <Search initialPosts={postSummaries} />;

@@ -16,6 +16,9 @@ export interface Post {
   slug: string;
   readingTime: number;
   categories?: string[];
+  tags?: string[];
+  keywords?: string[];
+  draft?: boolean;
 }
 
 export interface PostMeta {
@@ -23,6 +26,9 @@ export interface PostMeta {
   date: string;
   excerpt?: string;
   categories?: string[];
+  tags?: string[];
+  keywords?: string[];
+  draft?: boolean;
   [key: string]: string | number | boolean | string[] | undefined;
 }
 
