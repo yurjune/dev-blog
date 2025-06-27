@@ -31,21 +31,21 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       keywords: post.keywords || [],
+      alternates: {
+        canonical: postUrl,
+      },
       openGraph: {
         title: post.title,
         description: post.excerpt,
-        tags: post.tags,
         type: "article",
         url: postUrl,
         publishedTime: post.date,
-        authors: [SITE_METADATA.author],
+        tags: post.tags,
+        // authors: [SITE_METADATA.author],
       },
       twitter: {
         title: post.title,
         description: post.excerpt,
-      },
-      alternates: {
-        canonical: postUrl,
       },
     };
   } catch {

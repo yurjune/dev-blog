@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   },
   description: SITE_METADATA.description,
   keywords: [...SITE_METADATA.keywords],
-  authors: [{ name: SITE_METADATA.author }],
-  creator: SITE_METADATA.author,
-  publisher: SITE_METADATA.siteName,
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  // authors: [{ name: SITE_METADATA.author }],
+  // creator: SITE_METADATA.author,
+  // publisher: SITE_METADATA.siteName,
+  // formatDetection: {
+  //   email: false,
+  //   address: false,
+  //   telephone: false,
+  // },
   metadataBase: new URL(SITE_METADATA.baseUrl),
   alternates: {
     canonical: "/",
