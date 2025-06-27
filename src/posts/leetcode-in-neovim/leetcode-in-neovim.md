@@ -4,7 +4,7 @@ title: "Neovim에서 Leetcode 문제를 풀어보자!"
 slug: "leetcode-in-neovim"
 image: "image5.png"
 tags: ["Neovim"]
-keywords: ["Neovim", "Leetcode"]
+keywords: ["neovim", "leetcode", "plugin", "네오빔", "리트코드", "플러그인"]
 comments: true
 draft: false
 ---
