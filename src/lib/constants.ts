@@ -40,23 +40,25 @@ interface GiscusProps {
   category: string;
   categoryId: string;
   mapping: string;
-  strict: boolean;
-  reactionsEnabled: boolean;
-  emitMetadata: boolean;
+  strict: string;
+  reactionsEnabled: string;
+  emitMetadata: string;
   inputPosition: string;
   theme: string;
+  crossorigin: string;
   lang: string;
 }
 export const GISCUS_CONFIG: GiscusProps = {
-  repo: "yurjune/yurjune.github.io",
+  repo: "yurjune/dev-blog",
   repoId: process.env.GISCUS_REPO_ID || "",
   category: "Comments",
   categoryId: process.env.GISCUS_CATEGORY_ID || "",
   mapping: "pathname",
-  strict: false,
-  reactionsEnabled: true,
-  emitMetadata: false,
-  inputPosition: "bottom",
+  strict: "0",
+  reactionsEnabled: "1",
+  emitMetadata: "0",
+  inputPosition: "bottom", // comments input position
   theme: "dark_tritanopia",
+  crossorigin: "anonymous",
   lang: "ko",
 } as const;

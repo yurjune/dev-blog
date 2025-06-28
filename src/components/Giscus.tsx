@@ -21,6 +21,7 @@ export default function Giscus() {
     emitMetadata,
     inputPosition,
     theme,
+    crossorigin,
     lang,
   } = GISCUS_CONFIG;
 
@@ -32,11 +33,12 @@ export default function Giscus() {
     script.setAttribute("data-category", category);
     script.setAttribute("data-category-id", categoryId);
     script.setAttribute("data-mapping", mapping);
-    script.setAttribute("data-strict", strict ? "1" : "0");
-    script.setAttribute("data-reactions-enabled", reactionsEnabled ? "1" : "0");
-    script.setAttribute("data-emit-metadata", emitMetadata ? "1" : "0");
+    script.setAttribute("data-strict", strict);
+    script.setAttribute("data-reactions-enabled", reactionsEnabled);
+    script.setAttribute("data-emit-metadata", emitMetadata);
     script.setAttribute("data-input-position", inputPosition);
     script.setAttribute("data-theme", theme);
+    script.setAttribute("crossorigin", crossorigin);
     script.setAttribute("data-lang", lang);
     script.crossOrigin = "anonymous";
     script.async = true;
@@ -62,6 +64,7 @@ export default function Giscus() {
     emitMetadata,
     inputPosition,
     theme,
+    crossorigin,
     lang,
   ]);
 
