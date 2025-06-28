@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: `Profile - ${SITE_METADATA.title}`,
   description: "프론트엔드 개발자 박용헌의 프로필과 경력 정보를 확인하세요.",
   keywords: [...SITE_METADATA.keywords, "프로필", "경력", "소개"],
   openGraph: {
