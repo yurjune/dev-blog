@@ -48,11 +48,12 @@ interface GiscusProps {
   crossorigin: string;
   lang: string;
 }
+
 export const GISCUS_CONFIG: GiscusProps = {
   repo: "yurjune/dev-blog",
-  repoId: process.env.GISCUS_REPO_ID || "",
+  repoId: "R_kgDOO_6t6Q",
   category: "Comments",
-  categoryId: process.env.GISCUS_CATEGORY_ID || "",
+  categoryId: "DIC_kwDOO_6t6c4CsJRN",
   mapping: "pathname",
   strict: "0",
   reactionsEnabled: "1",
