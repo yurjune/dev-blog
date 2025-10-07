@@ -3,7 +3,7 @@ date: "2025-10-07T00:00:00+09:00"
 title: "sidekick.nvim - Copilot Next Edit Suggestion 과 AI CLI 사용하기"
 slug: "sidekick-nvim"
 image: "sidekick-thumbnail.png"
-tags: ["Neovim"]
+tags: ["Neovim", "Plugin"]
 keywords: ["neovim", "plugin", "sidekick", "네오빔", "플러그인", "AI", "Claude Code", "Codex", "Copilot", ]
 comments: true
 draft: false
