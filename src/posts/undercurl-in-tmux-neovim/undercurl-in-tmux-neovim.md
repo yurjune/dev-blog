@@ -6,7 +6,7 @@ image: "image1.png"
 tags: ["Neovim"]
 keywords: ["neovim", "tmux", "undercurl", "네오빔"]
 comments: true
-draft: false
+draft: true
 ---
 
 Ghostty 터미널을 사용하고 있는데, undercurl을 지원하는 터미널이기 때문에 Neovim에서도 undercurl을 정상적으로 표시할 수 있다.
