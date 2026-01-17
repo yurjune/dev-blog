@@ -1,6 +1,6 @@
 ---
 date: "2026-01-16T00:00:00+09:00"
-title: "Rust로 멀티스레드 크롤러 만들기(1) - 병렬 크롤링과 동시성 처리"
+title: "Rust로 멀티 스레드 크롤러 만들기(1) - 병렬 크롤링과 동시성 처리"
 slug: "multi-thread-crawl-concurrency"
 image: ""
 tags: ["Rust"]
