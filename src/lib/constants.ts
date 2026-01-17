@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   name: "Jerry Park",
-  description: "Hello, I'm front-end developer",
+  description: "Hello, I'm front-end engineer",
   email: "yurjune@naver.com",
   github: "https://github.com/yurjune",
   domain: "https://jerry-dev.com",
