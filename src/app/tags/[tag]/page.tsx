@@ -42,6 +42,16 @@ export default async function TagPage({ params }: TagPageProps) {
     new Set(posts.flatMap((post) => post.tags || [])),
   ).toSorted();
 
+  const tagCounts = posts.reduce(
+    (acc, post) => {
+      post.tags?.forEach((tag) => {
+        acc[tag] = (acc[tag] || 0) + 1;
+      });
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
   const filteredPosts = posts.filter((post) => post.tags?.includes(decodedTag));
 
   if (filteredPosts.length === 0) {
@@ -57,7 +67,12 @@ export default async function TagPage({ params }: TagPageProps) {
             rightContent={`${filteredPosts.length} post${filteredPosts.length !== 1 ? "s" : ""}`}
           />
 
-          <TagList tags={allTags} selectedTag={decodedTag} />
+          <TagList
+            tags={allTags}
+            selectedTag={decodedTag}
+            tagCounts={tagCounts}
+            totalCount={posts.length}
+          />
 
           <div className="space-y-4">
             {filteredPosts.map((post) => (

@@ -16,6 +16,13 @@ export default async function TagsPage() {
     new Set(posts.flatMap((post) => post.tags || [])),
   ).toSorted();
 
+  const tagCounts = posts.reduce<Record<string, number>>((acc, post) => {
+    post.tags?.forEach((tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+    });
+    return acc;
+  }, {});
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-4">
       <div className="space-y-6 sm:space-y-8">
@@ -25,7 +32,11 @@ export default async function TagsPage() {
             rightContent={`${posts.length} post${posts.length !== 1 ? "s" : ""}`}
           />
 
-          <TagList tags={allTags} />
+          <TagList
+            tags={allTags}
+            tagCounts={tagCounts}
+            totalCount={posts.length}
+          />
 
           <div className="space-y-4">
             {posts.map((post) => (
