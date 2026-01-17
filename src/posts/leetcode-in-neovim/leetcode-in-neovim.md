@@ -6,7 +6,7 @@ image: "image5.png"
 tags: ["Neovim", "Plugin"]
 keywords: ["neovim", "leetcode", "plugin", "네오빔", "리트코드", "플러그인"]
 comments: true
-draft: false
+draft: true 
 ---
 
 안녕하세요! 오늘은 [leetcode.nvim](https://github.com/kawre/leetcode.nvim/issues) 이라는 플러그인을 소개해드리려고 하는데, Neovim 에서 Leetcode 문제를 풀 수 있는 플러그인입니다!
