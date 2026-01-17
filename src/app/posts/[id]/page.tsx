@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import Giscus from "@/components/Giscus";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 
@@ -103,13 +102,13 @@ export default async function PostPage({ params }: PostPageProps) {
         </header>
 
         {/* 게시글 내용 */}
-        <article className="prose prose-invert prose-lg max-w-none">
+        <article className="prose prose-invert prose-lg max-w-none mb-8">
           <MarkdownRenderer content={post.content} />
         </article>
 
-        <div className="mt-12 pt-8 border-t border-neutral-700 mb-4">
-          <Giscus />
-        </div>
+        {/* <div className="mt-12 pt-8 border-t border-neutral-700 mb-4"> */}
+        {/*   <Giscus /> */}
+        {/* </div> */}
       </div>
     );
   } catch {
