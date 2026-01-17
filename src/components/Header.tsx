@@ -32,7 +32,7 @@ export default function Header() {
     <header
       className={cn(
         "w-full backdrop-blur-lg bg-black/20 border-b border-gray-800 sticky top-0 z-50 transition-transform duration-300",
-        isVisible ? "translate-y-0" : "-translate-y-full"
+        isVisible ? "translate-y-0" : "-translate-y-full",
       )}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +56,7 @@ export default function Header() {
                     asChild
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-gray-300 hover:text-white hover:bg-neutral-800 text-base"
+                      "bg-transparent text-gray-300 hover:text-white hover:bg-neutral-800 text-base",
                     )}
                   >
                     <Link href={item.href}>{item.name}</Link>

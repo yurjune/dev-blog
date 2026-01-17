@@ -25,7 +25,6 @@ export async function generateMetadata({
 }: TagPageProps): Promise<Metadata> {
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
-  console.log("generateMetadata decodedTag:", decodedTag); // __AUTO_GENERATED_PRINT_VAR_END__
 
   return {
     title: `Posts tagged with "${decodedTag}"`,
