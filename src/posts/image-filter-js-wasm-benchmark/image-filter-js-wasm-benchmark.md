@@ -3,6 +3,7 @@ date: "2026-01-29T00:00:00+09:00"
 title: "이미지 필터로 비교해보는 Javascript vs WebAssembly 성능 차이"
 slug: "image-filter-js-wasm-benchmark"
 tags: ["WebAssembly", "Javascript"]
+image: "grayscale.png"
 keywords:
   ["프론트엔드", "frontend", "웹어셈블리", "WebAssembly"]
 comments: true
@@ -48,10 +49,15 @@ Rust로 작성한 코드 중에 wasm 파일을 통해 JS로 사용할 수 있도
 `wasm-bindgen` 크레이트를 설치하고, export 대상 함수들에 `#[wasm-bindgen]` attribute 매크로를 추가하면 된다.
 
 ```rust
+use wasm_bindgen::prelude::wasm_bindgen;
+
 #[wasm_bindgen]
 pub fn grayscale_wasm(pixels: &mut [u8]) {
     for chunk in pixels.chunks_exact_mut(4) {
-        let luma = rgb_to_luma(chunk[0], chunk[1], chunk[2]);
+        let r = (chunk[0] as u32) * 306; // 0.299 * 1024
+        let g = (chunk[1] as u32) * 601; // 0.587 * 1024
+        let b = (chunk[2] as u32) * 117; // 0.114 * 1024
+        let luma = ((r + g + b) >> 10) as u8;
         chunk[0] = luma;
         chunk[1] = luma;
         chunk[2] = luma;
@@ -79,6 +85,8 @@ wasm-pack build --target web --release
 - `{project_name}.wasm.d.ts` - Wasm 모듈 타입 정의
 
 # Grayscale 필터 적용하기
+
+![grayscale](grayscale.png)
 
 먼저 Grayscale 필터를 적용해보았다. Grayscale 적용 방법은, RGB 값으로 luma 값(정규화된 가중 평균)을 계산하고, 그 결과를 각 RGB 채널에 대입해주면 된다.
 픽셀 배열을 순회하면서 연산 후 요소를 수정만 하면 되기 때문에 `O(n)`의 시간복잡도로 처리할 수 있다.
@@ -117,20 +125,24 @@ JS, Rust 모두 정수 연산으로 바꿔준 결과, 웹 어셈블리가 약 2.
 
 # 가우시안 블러 필터 적용하기
 
-가우시안 블러는 주변 픽셀과의 거리 기반으로 가우시안 분포를 갖는 `K x K` 커널로 각 픽셀에 가중 평균을 적용해 흐림 효과를 생성하는 방법이다.
+![gaussian](gaussian.png)
 
-중간 정도의 블러 효과를 위해 41x41 커널(반경 20, 시그마 6.6)을 사용했는데, 시간 복잡도는 `O(n * k^2)`이 된다.
-이렇게 하면 1220만 픽셀 기준으로 약 `1220만 * 41^2` 의 연산이 필요하므로 최적화할 필요가 있었다.
+**가우시안 블러(Gaussian Blur)** 기법은 주변 픽셀과의 거리를 기반으로 가우시안 분포를 갖는 `K x K` 커널로 각 픽셀에 가중 평균을 적용해 흐림 효과를 생성하는 방법이다.
 
-이때 **분리 가능한 가우시안 블러** 기법을 사용하여 최적화할 수 있다.
-여기서 말하는 분리란, 2차원 커널을 1차원 수평/수직 패스로 분리하여 연산한다는 것을 의미한다.
-따라서 수평, 수직 방향으로 픽셀마다 K번씩만 연산하면 전체 시간 복잡도가 `O(n * k^2)`에서 `O(2nk)`로 줄어든다.
+그러나 실제로 2차원 커널을 사용하면 너무 느리기 때문에, **박스 블러(Box Blur)** 기법을 여러번 중첩하여 가우시안 분포에 가까워지도록 만드는 방식을 사용하였다.
 
-> JavaScript: 평균 **2100ms**
+박스 블러는 슬라이딩 윈도우 방식으로, 정사각형 영역의 픽셀들의 평균값을 계산해 중심 픽셀에 반영하는 방식이다.
+그리고 이 슬라이딩 윈도우도 수평/수직 방향으로 분리하여 계산하면 `m x m`의 연산을 `m x 2`로 줄일 수 있다.
+
+따라서 수평/수직으로 박스 블러를 1회 적용하는 것을 3번 반복하면 `n * 6`번의 연산만으로 가우시안 블러를 구현할 수 있다.
+
+성능 측정 결과는 다음과 같다.
+
+> JavaScript: 평균 **450ms**
 >
-> WebAssembly: 평균 **990ms**
+> WebAssembly: 평균 **280ms**
 >
-> 속도 향상: 약 **2.1배**
+> 속도 향상: 약 **1.6배**
 
 # 웹 어셈블리의 lazy compilation
 
@@ -147,8 +159,8 @@ V8 엔진 기준으로, Ignition 인터프리터는 소스코드를 파싱한 �
 
 ## Liftoff 컴파일의 lazyness
 
-벤치마크를 하면서 문제되는 현상이 하나 있었는데, 바로 **WebAssembly 함수의 첫 호출이 항상 첫 호출 이후보다 느린 것**이었다.
-첫 함수 호출은 약 **2~2.5배** 정도 느렸고, 이로 인해 JS와의 성능 차이가 없거나 오히려 더 느렸다.
+벤치마크를 하면서 문제되는 현상이 하나 있었는데, 바로 **WebAssembly 함수의 첫 호출이 항상 다음 호출보다 느린 것**이었다.
+첫 함수 호출은 다음 호출보다 약 **2~2.5배** 정도 느렸고, 이로 인해 JS와의 성능 차이가 없거나 오히려 더 느렸다.
 
 ![performance](performance.png)
 
@@ -177,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await init();
   // 적정 크기의 데이터로 warm up
   grayscale_wasm(new Uint8ClampedArray(500000));
-  gaussian_blur_wasm(new Uint8ClampedArray(2500), 25, 25);
+  gaussian_blur_wasm(new Uint8ClampedArray(40000), 100, 100);
 });
 ```
 
@@ -224,7 +236,7 @@ SIMD 연산은 이미지 필터 연산에 활용하기에 매우 적합한 방�
 
 # 마무리
 
-실험 결과를 통해 WebAssembly 사용 시 2배 이상의 성능 향상 이점을 얻을 수 있다는 것을 확인하였다.
+실험 결과를 통해 WebAssembly 사용 시 2배 전후의 성능 향상 이점을 얻을 수 있다는 것을 확인하였다.
 
 한 가지 걸리는 것은 최초 호출 시의 지연이다. 가우시안 블러에서 오히려 JS보다 느린 결과를 얻었기 때문에, 실제 프로덕션 환경에서는 사용한다면 warm-up 전략을 충분히 고려해야 될 것이다.
 
