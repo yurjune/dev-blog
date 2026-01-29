@@ -1,6 +1,6 @@
 ---
 date: "2025-06-25T00:00:00+09:00"
-title: "클라이언트에서 안전한 자동 저장 기능을 구현해보자!"
+title: "클라이언트에서의 안전한 자동 저장 기능 설계"
 slug: "implement-auto-save-function"
 tags: ["React", "Typescript"]
 keywords:

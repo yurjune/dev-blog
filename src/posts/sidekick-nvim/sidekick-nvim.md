@@ -1,6 +1,6 @@
 ---
 date: "2025-10-07T00:00:00+09:00"
-title: "Sidekick.nvim - Neovim에서 AI Agent와 Tab 기반 자동완성 사용하기"
+title: "Sidekick.nvim - Neovim의 AI Agent + Tab 자동완성 플러그인"
 slug: "sidekick-nvim"
 image: "sidekick-thumbnail.png"
 tags: ["Neovim"]
