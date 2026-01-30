@@ -1,4 +1,9 @@
-import { getPostMarkdown, getAllPostIds, getAdjacentPosts } from "@/lib/posts";
+import {
+  getPostMarkdown,
+  getAllPostIds,
+  getAdjacentPosts,
+  Post,
+} from "@/lib/posts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -70,47 +75,10 @@ export default async function PostPage({ params }: PostPageProps) {
         <ThreeColLayout.Left />
 
         <ThreeColLayout.Center>
-          <div className="mb-4 sm:mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              홈으로 돌아가기
-            </Link>
-          </div>
+          <GoBackNavigator href="/" text="홈으로 돌아가기" />
 
-          {/* 게시글 헤더 */}
-          <header className="mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              {post.title}
-            </h1>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
-              <div className="text-gray-400 text-sm">
-                {new Date(post.date).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}{" "}
-                • {post.readingTime}분 읽기
-              </div>
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <Tag
-                      key={tag}
-                      href={`/tags/${encodeURIComponent(tag)}`}
-                      size="small"
-                    >
-                      {tag}
-                    </Tag>
-                  ))}
-                </div>
-              )}
-            </div>
-          </header>
+          <Header post={post} />
 
-          {/* 게시글 내용 */}
           <article className="prose prose-invert prose-lg max-w-none mb-8">
             <MarkdownRenderer content={post.content} />
           </article>
@@ -118,10 +86,6 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="h-[1px] bg-neutral-700 mb-8" />
 
           <PostNavigation prev={adjacentPosts.prev} next={adjacentPosts.next} />
-
-          {/* <div className="mt-12 pt-8 border-t border-neutral-700 mb-4"> */}
-          {/*   <Giscus /> */}
-          {/* </div> */}
         </ThreeColLayout.Center>
 
         <ThreeColLayout.Right>
@@ -133,3 +97,53 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 }
+
+const GoBackNavigator = ({ href, text }: { href: string; text: string }) => {
+  return (
+    <div className="mb-4 sm:mb-6">
+      <Link
+        href={href}
+        className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {text}
+      </Link>
+    </div>
+  );
+};
+
+const Header = ({ post }: { post: Post }) => {
+  const date = new Date(post.date).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return (
+    <header className="mb-8">
+      <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+        {post.title}
+      </h1>
+
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+        <div className="text-gray-400 text-sm">
+          {date} • {post.readingTime}분 읽기
+        </div>
+
+        {post.tags && post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map((tag) => {
+              const href = `/tags/${encodeURIComponent(tag)}`;
+
+              return (
+                <Tag key={tag} href={href} size="small">
+                  {tag}
+                </Tag>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
