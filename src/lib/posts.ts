@@ -207,3 +207,37 @@ export function getPostExcerpt(
 
   return cleanText.substring(0, maxLength).trim() + "...";
 }
+
+export interface AdjacentPosts {
+  prev: { slug: string; title: string } | null;
+  next: { slug: string; title: string } | null;
+}
+
+export function getAdjacentPosts(currentSlug: string): AdjacentPosts {
+  const sortedPosts = getSortedPostsData();
+  const currentIndex = sortedPosts.findIndex(
+    (post) => post.slug === currentSlug
+  );
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  const prev =
+    currentIndex < sortedPosts.length - 1
+      ? {
+          slug: sortedPosts[currentIndex + 1].slug,
+          title: sortedPosts[currentIndex + 1].title,
+        }
+      : null;
+
+  const next =
+    currentIndex > 0
+      ? {
+          slug: sortedPosts[currentIndex - 1].slug,
+          title: sortedPosts[currentIndex - 1].title,
+        }
+      : null;
+
+  return { prev, next };
+}

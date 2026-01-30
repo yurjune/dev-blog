@@ -1,9 +1,10 @@
-import { getPostMarkdown, getAllPostIds } from "@/lib/posts";
+import { getPostMarkdown, getAllPostIds, getAdjacentPosts } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Tag } from "@/components/Tag";
+import { PostNavigation } from "@/components/PostNavigation";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 
@@ -59,10 +60,10 @@ export default async function PostPage({ params }: PostPageProps) {
   try {
     const { id } = await params;
     const post = await getPostMarkdown(id);
+    const adjacentPosts = getAdjacentPosts(id);
 
     return (
       <div className="max-w-3xl mx-auto px-4 py-4">
-        {/* 뒤로가기 버튼 */}
         <div className="mb-4 sm:mb-6">
           <Link
             href="/"
@@ -107,6 +108,10 @@ export default async function PostPage({ params }: PostPageProps) {
         <article className="prose prose-invert prose-lg max-w-none mb-8">
           <MarkdownRenderer content={post.content} />
         </article>
+
+        <div className="h-[1px] bg-neutral-700 mb-8" />
+
+        <PostNavigation prev={adjacentPosts.prev} next={adjacentPosts.next} />
 
         {/* <div className="mt-12 pt-8 border-t border-neutral-700 mb-4"> */}
         {/*   <Giscus /> */}
