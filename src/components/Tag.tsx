@@ -18,7 +18,7 @@ export function Tag({
 }: TagProps) {
   const className = cn(
     "inline-flex items-center rounded-full font-medium transition-all border border-neutral-700/50",
-    size === "large" && "px-4 py-2 text-sm",
+    size === "large" && "px-4 py-[7px] text-sm",
     size === "small" && "px-3 py-1 text-sm",
     isSelected
       ? "bg-neutral-700 text-white border-neutral-600 shadow-[0_0_0_1px_rgb(82,82,82)]"
