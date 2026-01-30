@@ -9,19 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default async function SearchPage() {
-  // 빌드 타임에 posts 데이터 로드
-  const sortedPosts = getSortedPostsData();
-  const posts = sortedPosts.map((post) => ({
-    id: post.id,
-    title: post.title,
+  const posts = getSortedPostsData().map((post) => ({
+    ...post,
     content: "",
-    date: post.date,
-    excerpt: post.excerpt,
-    slug: post.slug,
-    readingTime: post.readingTime,
-    tags: post.tags ?? [],
-    keywords: post.keywords ?? [],
-    draft: post.draft ?? false,
   }));
 
   return (

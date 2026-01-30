@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default async function TagsPage() {
-  const posts = getSortedPostsData();
+  const posts = getSortedPostsData().map((post) => ({
+    ...post,
+    content: "",
+  }));
 
   const allTags = Array.from(
     new Set(posts.flatMap((post) => post.tags || [])),

@@ -7,7 +7,10 @@ import { ProfileSection } from "@/components/ProfileSection";
 export const metadata: Metadata = {};
 
 export default async function Home() {
-  const posts = getSortedPostsData();
+  const posts = getSortedPostsData().map((post) => ({
+    ...post,
+    content: "",
+  }));
 
   return (
     <div className="max-w-content mx-auto px-4 py-4">

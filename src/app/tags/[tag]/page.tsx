@@ -36,7 +36,10 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
 
-  const posts = getSortedPostsData();
+  const posts = getSortedPostsData().map((post) => ({
+    ...post,
+    content: "",
+  }));
 
   const allTags = Array.from(
     new Set(posts.flatMap((post) => post.tags || [])),
