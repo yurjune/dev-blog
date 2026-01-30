@@ -24,7 +24,7 @@ export default async function ProfilePage() {
   const profile = await getProfileData();
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-4">
+    <div className="max-w-content mx-auto px-4 py-4">
       <div className="space-y-6">
         <PageHeader title="Profile" />
 

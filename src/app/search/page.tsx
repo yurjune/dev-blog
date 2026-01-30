@@ -25,7 +25,7 @@ export default async function SearchPage() {
   }));
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-4">
+    <div className="max-w-content mx-auto px-4 py-4">
       <Search initialPosts={posts} />
     </div>
   );

@@ -59,7 +59,7 @@ export default async function TagPage({ params }: TagPageProps) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-4">
+    <div className="max-w-content mx-auto px-4 py-4">
       <div className="space-y-6 sm:space-y-8">
         <section className="space-y-6">
           <PageHeader

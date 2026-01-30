@@ -5,6 +5,10 @@
   --foreground: #ededed;
 }
 
+@theme {
+  --max-width-content: 44rem;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

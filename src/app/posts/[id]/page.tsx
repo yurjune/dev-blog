@@ -71,7 +71,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
     return (
       <div className="flex-col py-4">
-        <div className="max-w-3xl mx-auto px-4 mb-4">
+        <div className="max-w-content mx-auto px-4 mb-4">
           <div className="mb-4">
             <GoBackNavigator href="/" text="홈으로 돌아가기" />
           </div>
@@ -82,7 +82,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-4">
           <div className="hidden xl:block" />
 
-          <div className="w-full max-w-3xl px-4 mx-auto">
+          <div className="max-w-content mx-auto w-full px-4">
             <article className="prose prose-invert prose-lg max-w-none mb-8">
               <MarkdownRenderer content={post.content} />
             </article>
