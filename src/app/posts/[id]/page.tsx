@@ -14,6 +14,7 @@ import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 import { TableOfContents } from "@/components/TableOfContents";
 import { extractHeadings } from "@/lib/toc";
+import { ProfileSection } from "@/components/ProfileSection";
 
 interface PostPageProps {
   params: Promise<{
@@ -87,12 +88,16 @@ export default async function PostPage({ params }: PostPageProps) {
               <MarkdownRenderer content={post.content} />
             </article>
 
-            <div className="h-[1px] bg-neutral-700 mb-8" />
+            <div className="h-px bg-neutral-700 mb-8" />
 
-            <PostNavigation
-              prev={adjacentPosts.prev}
-              next={adjacentPosts.next}
-            />
+            <div className="mb-6">
+              <PostNavigation
+                prev={adjacentPosts.prev}
+                next={adjacentPosts.next}
+              />
+            </div>
+
+            <ProfileSection />
           </div>
 
           <div className="hidden xl:block w-44">
