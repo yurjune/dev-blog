@@ -42,14 +42,12 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
               <HighlightedText text={post.excerpt} searchTerm={searchTerm} />
             </p>
             {post.tags && post.tags.length > 0 && (
-              <div
-                className="flex flex-wrap gap-2 mt-4"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <div className="flex flex-wrap gap-2 mt-4">
                 {post.tags.map((tag) => (
                   <PostCardTag
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag)}`}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <HighlightedText text={tag} searchTerm={searchTerm} />
                   </PostCardTag>

@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils";
 interface PostCardTagProps {
   href?: string;
   children: React.ReactNode;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
-export function PostCardTag({ href, children }: PostCardTagProps) {
+export function PostCardTag({ href, children, onClick }: PostCardTagProps) {
   const className = cn(
     "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium",
     "bg-neutral-700/50 text-neutral-300 border border-neutral-600/50",
@@ -16,7 +17,7 @@ export function PostCardTag({ href, children }: PostCardTagProps) {
 
   if (href) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} onClick={onClick}>
         {children}
       </Link>
     );
