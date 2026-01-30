@@ -38,7 +38,7 @@ export default function Header() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* 로고/블로그 제목 */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <Link
               href="/"
               className="text-xl font-bold text-white hover:text-gray-300 transition-colors"

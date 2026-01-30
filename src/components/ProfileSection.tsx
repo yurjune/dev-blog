@@ -7,7 +7,7 @@ export function ProfileSection() {
   return (
     <section className="py-4">
       <div className="flex flex-row items-center gap-6">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden">
             <Image
               src="/avatar.jpg"

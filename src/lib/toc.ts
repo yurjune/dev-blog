@@ -10,9 +10,8 @@ export function extractHeadings(markdown: string): TocItem[] {
 
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: TocItem[] = [];
-  let match;
 
-  while ((match = headingRegex.exec(withoutCodeBlocks)) !== null) {
+  for (const match of withoutCodeBlocks.matchAll(headingRegex)) {
     const level = match[1].length;
     const text = match[2].trim();
     const id = text
