@@ -5,11 +5,14 @@ export interface TocItem {
 }
 
 export function extractHeadings(markdown: string): TocItem[] {
+  // Remove code blocks first
+  const withoutCodeBlocks = markdown.replace(/```[\s\S]*?```/g, "");
+
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: TocItem[] = [];
   let match;
 
-  while ((match = headingRegex.exec(markdown)) !== null) {
+  while ((match = headingRegex.exec(withoutCodeBlocks)) !== null) {
     const level = match[1].length;
     const text = match[2].trim();
     const id = text
