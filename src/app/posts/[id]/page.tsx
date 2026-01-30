@@ -7,6 +7,9 @@ import { Tag } from "@/components/Tag";
 import { PostNavigation } from "@/components/PostNavigation";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
+import { TableOfContents } from "@/components/TableOfContents";
+import { extractHeadings } from "@/lib/toc";
+import { ThreeColLayout } from "@/components/three-col-layout/ThreeColLayout";
 
 interface PostPageProps {
   params: Promise<{
@@ -63,60 +66,68 @@ export default async function PostPage({ params }: PostPageProps) {
     const adjacentPosts = getAdjacentPosts(id);
 
     return (
-      <div className="max-w-3xl mx-auto px-4 py-4">
-        <div className="mb-4 sm:mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            홈으로 돌아가기
-          </Link>
-        </div>
+      <ThreeColLayout>
+        <ThreeColLayout.Left />
 
-        {/* 게시글 헤더 */}
-        <header className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {post.title}
-          </h1>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
-            <div className="text-gray-400 text-sm">
-              {new Date(post.date).toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}{" "}
-              • {post.readingTime}분 읽기
-            </div>
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <Tag
-                    key={tag}
-                    href={`/tags/${encodeURIComponent(tag)}`}
-                    size="small"
-                  >
-                    {tag}
-                  </Tag>
-                ))}
-              </div>
-            )}
+        <ThreeColLayout.Center>
+          <div className="mb-4 sm:mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              홈으로 돌아가기
+            </Link>
           </div>
-        </header>
 
-        {/* 게시글 내용 */}
-        <article className="prose prose-invert prose-lg max-w-none mb-8">
-          <MarkdownRenderer content={post.content} />
-        </article>
+          {/* 게시글 헤더 */}
+          <header className="mb-8">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              {post.title}
+            </h1>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+              <div className="text-gray-400 text-sm">
+                {new Date(post.date).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
+                • {post.readingTime}분 읽기
+              </div>
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <Tag
+                      key={tag}
+                      href={`/tags/${encodeURIComponent(tag)}`}
+                      size="small"
+                    >
+                      {tag}
+                    </Tag>
+                  ))}
+                </div>
+              )}
+            </div>
+          </header>
 
-        <div className="h-[1px] bg-neutral-700 mb-8" />
+          {/* 게시글 내용 */}
+          <article className="prose prose-invert prose-lg max-w-none mb-8">
+            <MarkdownRenderer content={post.content} />
+          </article>
 
-        <PostNavigation prev={adjacentPosts.prev} next={adjacentPosts.next} />
+          <div className="h-[1px] bg-neutral-700 mb-8" />
 
-        {/* <div className="mt-12 pt-8 border-t border-neutral-700 mb-4"> */}
-        {/*   <Giscus /> */}
-        {/* </div> */}
-      </div>
+          <PostNavigation prev={adjacentPosts.prev} next={adjacentPosts.next} />
+
+          {/* <div className="mt-12 pt-8 border-t border-neutral-700 mb-4"> */}
+          {/*   <Giscus /> */}
+          {/* </div> */}
+        </ThreeColLayout.Center>
+
+        <ThreeColLayout.Right>
+          <TableOfContents items={extractHeadings(post.content)} />
+        </ThreeColLayout.Right>
+      </ThreeColLayout>
     );
   } catch {
     notFound();
