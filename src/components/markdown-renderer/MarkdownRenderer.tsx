@@ -3,7 +3,7 @@
 import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
-import CodeBlock from "@/components/CodeBlock";
+import CodeBlock from "./CodeBlock";
 
 function extractId(text: string) {
   return text

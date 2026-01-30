@@ -9,7 +9,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/shadcn-ui/navigation-menu";
-import { HeaderButton } from "@/components/HeaderButton";
+import { HeaderButton } from "@/components/header/HeaderButton";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 

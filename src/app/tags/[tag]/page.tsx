@@ -1,7 +1,7 @@
 import { getSortedPostsData } from "@/lib/posts";
-import { PostCard } from "@/components/PostCard";
-import { PageHeader } from "@/components/PageHeader";
-import { TagList } from "@/components/TagList";
+import { PostCard } from "@/components/post-card/PostCard";
+import { PageHeader } from "@/components/header/PageHeader";
+import { TagList } from "@/components/tag/TagList";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

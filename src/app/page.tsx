@@ -1,6 +1,6 @@
 import { getSortedPostsData } from "@/lib/posts";
-import { PostCard } from "@/components/PostCard";
-import { PageHeader } from "@/components/PageHeader";
+import { PostCard } from "@/components/post-card/PostCard";
+import { PageHeader } from "@/components/header/PageHeader";
 import { Metadata } from "next";
 import { ProfileSection } from "@/components/ProfileSection";
 
@@ -12,7 +12,6 @@ export default async function Home() {
   return (
     <div className="max-w-content mx-auto px-4 py-4">
       <div className="space-y-6 sm:space-y-8">
-        {/* 프로필 섹션 */}
         <ProfileSection />
 
         <section className="space-y-6">

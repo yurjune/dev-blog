@@ -8,7 +8,7 @@ import {
 } from "@/components/shadcn-ui/card";
 import { formatDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { HighlightedText } from "./HighlightedText";
+import { HighlightedText } from "../HighlightedText";
 import { PostCardTag } from "./PostCardTag";
 import { Post } from "@/lib/posts";
 

@@ -7,8 +7,8 @@ import {
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
-import { Tag } from "@/components/Tag";
+import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
+import { Tag } from "@/components/tag/Tag";
 import { PostNavigation } from "@/components/PostNavigation";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
