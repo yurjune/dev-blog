@@ -62,7 +62,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     ),
     // 단락 스타일링
     p: ({ children, ...props }) => (
-      <p className="text-white leading-relaxed mb-4 last:mb-0" {...props}>
+      <p className="text-white leading-[1.72] mb-4 last:mb-0" {...props}>
         {children}
       </p>
     ),
