@@ -14,7 +14,6 @@ import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/constants";
 import { TableOfContents } from "@/components/TableOfContents";
 import { extractHeadings } from "@/lib/toc";
-import { ThreeColLayout } from "@/components/three-col-layout/ThreeColLayout";
 
 interface PostPageProps {
   params: Promise<{
@@ -71,27 +70,36 @@ export default async function PostPage({ params }: PostPageProps) {
     const adjacentPosts = getAdjacentPosts(id);
 
     return (
-      <ThreeColLayout>
-        <ThreeColLayout.Left />
-
-        <ThreeColLayout.Center>
-          <GoBackNavigator href="/" text="홈으로 돌아가기" />
+      <div className="flex-col py-4">
+        <div className="max-w-3xl mx-auto px-4 mb-4">
+          <div className="mb-4">
+            <GoBackNavigator href="/" text="홈으로 돌아가기" />
+          </div>
 
           <Header post={post} />
+        </div>
 
-          <article className="prose prose-invert prose-lg max-w-none mb-8">
-            <MarkdownRenderer content={post.content} />
-          </article>
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-4">
+          <div className="hidden xl:block" />
 
-          <div className="h-[1px] bg-neutral-700 mb-8" />
+          <div className="w-full max-w-3xl px-4 mx-auto">
+            <article className="prose prose-invert prose-lg max-w-none mb-8">
+              <MarkdownRenderer content={post.content} />
+            </article>
 
-          <PostNavigation prev={adjacentPosts.prev} next={adjacentPosts.next} />
-        </ThreeColLayout.Center>
+            <div className="h-[1px] bg-neutral-700 mb-8" />
 
-        <ThreeColLayout.Right>
-          <TableOfContents items={extractHeadings(post.content)} />
-        </ThreeColLayout.Right>
-      </ThreeColLayout>
+            <PostNavigation
+              prev={adjacentPosts.prev}
+              next={adjacentPosts.next}
+            />
+          </div>
+
+          <div className="hidden xl:block w-44">
+            <TableOfContents items={extractHeadings(post.content)} />
+          </div>
+        </div>
+      </div>
     );
   } catch {
     notFound();
@@ -100,15 +108,13 @@ export default async function PostPage({ params }: PostPageProps) {
 
 const GoBackNavigator = ({ href, text }: { href: string; text: string }) => {
   return (
-    <div className="mb-4 sm:mb-6">
-      <Link
-        href={href}
-        className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        {text}
-      </Link>
-    </div>
+    <Link
+      href={href}
+      className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+    >
+      <ArrowLeft className="h-4 w-4" />
+      {text}
+    </Link>
   );
 };
 
@@ -120,12 +126,12 @@ const Header = ({ post }: { post: Post }) => {
   });
 
   return (
-    <header className="mb-8">
+    <header>
       <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
         {post.title}
       </h1>
 
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="text-gray-400 text-sm">
           {date} • {post.readingTime}분 읽기
         </div>

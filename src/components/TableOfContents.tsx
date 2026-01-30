@@ -46,7 +46,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   }
 
   return (
-    <nav className="sticky top-20 max-h-[calc(100vh-160px)] w-full overflow-auto">
+    <nav className="sticky top-20 max-h-[calc(100vh-12rem)] w-full overflow-auto">
       <p className="text-xs font-semibold text-white mb-4">목차</p>
 
       <ul className="space-y-1 text-sm">
