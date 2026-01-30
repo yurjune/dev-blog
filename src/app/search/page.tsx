@@ -24,5 +24,9 @@ export default async function SearchPage() {
     draft: post.draft ?? false,
   }));
 
-  return <Search initialPosts={posts} />;
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-4">
+      <Search initialPosts={posts} />;
+    </div>
+  );
 }
