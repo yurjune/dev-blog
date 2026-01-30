@@ -5,6 +5,13 @@ import { Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from "@/components/CodeBlock";
 
+function extractId(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s가-힣-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 interface MarkdownRendererProps {
   content: string;
 }
@@ -45,21 +52,45 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       </a>
     ),
     // 제목 스타일링
-    h1: ({ children, ...props }) => (
-      <h1 className="text-3xl font-bold text-white mb-4 mt-8" {...props}>
-        {children}
-      </h1>
-    ),
-    h2: ({ children, ...props }) => (
-      <h2 className="text-2xl font-bold text-white mb-4 mt-6" {...props}>
-        {children}
-      </h2>
-    ),
-    h3: ({ children, ...props }) => (
-      <h3 className="text-xl font-semibold text-white mb-3 mt-5" {...props}>
-        {children}
-      </h3>
-    ),
+    h1: ({ children, ...props }) => {
+      const text = String(children);
+      const id = extractId(text);
+      return (
+        <h1
+          id={id}
+          className="text-3xl font-bold text-white mb-4 mt-8 scroll-mt-20"
+          {...props}
+        >
+          {children}
+        </h1>
+      );
+    },
+    h2: ({ children, ...props }) => {
+      const text = String(children);
+      const id = extractId(text);
+      return (
+        <h2
+          id={id}
+          className="text-2xl font-bold text-white mb-4 mt-6 scroll-mt-20"
+          {...props}
+        >
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ children, ...props }) => {
+      const text = String(children);
+      const id = extractId(text);
+      return (
+        <h3
+          id={id}
+          className="text-xl font-semibold text-white mb-3 mt-5 scroll-mt-20"
+          {...props}
+        >
+          {children}
+        </h3>
+      );
+    },
     // 단락 스타일링
     p: ({ children, ...props }) => (
       <p className="text-white leading-[1.72] mb-5 last:mb-0" {...props}>
