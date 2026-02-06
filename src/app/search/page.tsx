@@ -1,10 +1,9 @@
 import { Search } from "@/components/Search";
 import { Metadata } from "next";
 import { getSortedPostsData } from "@/lib/posts";
-import { SITE_METADATA } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Search - ${SITE_METADATA.title}`,
+  title: `Search`,
   description: "Search through all blog posts",
   robots: {
     index: false,

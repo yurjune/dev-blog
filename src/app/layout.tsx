@@ -18,8 +18,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: SITE_METADATA.title,
-    template: SITE_METADATA.title,
+    default: SITE_METADATA.title, // title 이 누락된 페이지에 적용
+    // 하위 페이지의 title과 병합
+    // %s 자리에 하위 페이지의 title 삽입
+    template: `%s | ${SITE_METADATA.title}`,
   },
   description: SITE_METADATA.description,
   keywords: [...SITE_METADATA.keywords],
