@@ -7,6 +7,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tags",
   description: "Browse posts by tags",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default async function TagsPage() {

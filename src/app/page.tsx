@@ -4,7 +4,11 @@ import { PageHeader } from "@/components/header/PageHeader";
 import { Metadata } from "next";
 import { ProfileSection } from "@/components/ProfileSection";
 
-export const metadata: Metadata = {};
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const posts = getSortedPostsData().map((post) => ({

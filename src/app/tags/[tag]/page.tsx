@@ -29,6 +29,10 @@ export async function generateMetadata({
   return {
     title: `Posts tagged with "${decodedTag}"`,
     description: `Browse all posts tagged with ${decodedTag}`,
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 
