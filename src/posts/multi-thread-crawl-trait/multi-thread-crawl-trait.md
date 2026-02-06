@@ -4,7 +4,7 @@ title: "Rust로 멀티 스레드 크롤러 만들기(2) - Trait로 크롤링 패
 slug: "multi-thread-crawl-trait"
 image: ""
 tags: ["Rust"]
-keywords: ["러스트", "Rust", "트레이트", "trait", "크롤링", "추상화", "인터페이스"]
+keywords: ["러스트", "Rust", "트레이트", "trait", "크롤링", "Crawling", "추상화", "인터페이스"]
 comments: true
 draft: false
 ---

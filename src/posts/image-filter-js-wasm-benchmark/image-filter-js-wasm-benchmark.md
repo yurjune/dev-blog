@@ -4,8 +4,7 @@ title: "이미지 필터로 비교해보는 Javascript vs WebAssembly 성능 차
 slug: "image-filter-js-wasm-benchmark"
 tags: ["WebAssembly", "Javascript"]
 image: "grayscale.png"
-keywords:
-  ["프론트엔드", "frontend", "웹어셈블리", "WebAssembly"]
+keywords: ["프론트엔드", "frontend", "웹어셈블리", "WebAssembly", "wasm", "벤치마크", "블러"]
 comments: true
 draft: false
 ---
