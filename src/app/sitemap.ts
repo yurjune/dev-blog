@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getSortedPostsData();
   const postPages = posts.map((post) => ({
     url: `${SITE_METADATA.baseUrl}/posts/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 1,
   }));
