@@ -23,8 +23,8 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  const paths = getAllPostIds();
-  return paths;
+  const ids = getAllPostIds();
+  return ids.map((id) => ({ id }));
 }
 
 export async function generateMetadata({

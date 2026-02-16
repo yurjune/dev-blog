@@ -60,14 +60,7 @@ export function getAllPostIds() {
     return !(matterResult.data as PostMeta).draft;
   };
 
-  return fileNames
-    .filter(isDirectory)
-    .filter(isPublished)
-    .map((fileName) => {
-      return {
-        params: { id: fileName },
-      };
-    });
+  return fileNames.filter(isDirectory).filter(isPublished);
 }
 
 export function getSortedPostsData(): Post[] {
