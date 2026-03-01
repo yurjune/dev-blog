@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_METADATA.baseUrl), // 상대경로 메타값을 절대경로로 바꿀 때 사용
   openGraph: {
     url: SITE_METADATA.baseUrl,
-    type: SITE_METADATA.type,
+    type: "website",
     locale: SITE_METADATA.locale,
     siteName: SITE_METADATA.siteName,
     title: SITE_METADATA.title,

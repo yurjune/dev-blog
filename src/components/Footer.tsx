@@ -1,5 +1,5 @@
 import { Github, Mail, User } from "lucide-react";
-import { SITE_CONFIG } from "@/lib/seo";
+import { MY_INFO } from "@/lib/seo";
 import Link from "next/link";
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
           {/* 소셜 링크 */}
           <div className="flex gap-6">
             <a
-              href={SITE_CONFIG.github}
+              href={MY_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
@@ -22,7 +22,7 @@ export default function Footer() {
               <span className="text-sm">GitHub</span>
             </a>
             <a
-              href={`mailto:${SITE_CONFIG.email}`}
+              href={`mailto:${MY_INFO.email}`}
               className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               aria-label="Email"
             >
@@ -42,7 +42,7 @@ export default function Footer() {
           {/* 저작권 정보 */}
           <div className="text-center">
             <p className="text-gray-400 text-sm">
-              © {currentYear} {SITE_CONFIG.name}. All rights reserved.
+              © {currentYear} {MY_INFO.name}. All rights reserved.
             </p>
             <p className="text-gray-500 text-xs mt-2 flex items-center justify-center gap-1">
               Made with Next.js

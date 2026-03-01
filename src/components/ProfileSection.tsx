@@ -1,5 +1,5 @@
 import { Github, Mail, User } from "lucide-react";
-import { SITE_CONFIG } from "@/lib/seo";
+import { MY_INFO } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -21,15 +21,15 @@ export function ProfileSection() {
 
         <div className="flex flex-col items-start text-left">
           <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
-            {SITE_CONFIG.name}
+            {MY_INFO.name}
           </h1>
           <p className="text-base sm:text-lg text-gray-300 mb-2 max-w-2xl">
-            {SITE_CONFIG.description}
+            Hello, I&apos;m front-end engineer
           </p>
 
           <div className="flex gap-4">
             <a
-              href={SITE_CONFIG.github}
+              href={MY_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
@@ -37,7 +37,7 @@ export function ProfileSection() {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href={`mailto:${SITE_CONFIG.email}`}
+              href={`mailto:${MY_INFO.email}`}
               className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
             >
               <Mail className="h-5 w-5" />

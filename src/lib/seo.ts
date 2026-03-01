@@ -1,31 +1,30 @@
-export const SITE_CONFIG = {
+export const MY_INFO = {
   name: "Jerry Park",
-  description: "Hello, I'm front-end engineer",
   email: "yurjune@naver.com",
   github: "https://github.com/yurjune",
-  domain: "https://jerry-dev.com",
 } as const;
 
 export const SITE_METADATA = {
-  title: "Jerry's Dev Blog",
+  siteName: "Jerry's Dev Blog",
+  baseUrl: "https://jerry-dev.com",
+  title: "Jerry's Dev Blog - 제리의 개발 블로그",
   description:
-    "프론트엔드 개발자 Jerry의 기술 블로그입니다. React, Next.js, TypeScript 등 웹 개발 관련 기술과 경험을 공유합니다.",
+    "프론트엔드 개발자 제리의 기술 블로그입니다. React, Next.js, TypeScript 등 웹 개발 관련 기술과 경험을 공유합니다.",
+  author: "Jerry",
+  locale: "ko_KR",
+  image: "/avatar.jpg",
+  ogImage: "/og_image.jpg",
   keywords: [
     "프론트엔드",
+    "백엔드",
     "웹개발",
+    "개발블로그",
     "React",
     "Next.js",
     "TypeScript",
     "JavaScript",
-    "개발블로그",
+    "Programming",
   ],
-  author: "Jerry",
-  siteName: "Jerry's Dev Blog",
-  locale: "ko_KR",
-  type: "website",
-  image: "/avatar.jpg",
-  ogImage: "/og_image.jpg",
-  baseUrl: SITE_CONFIG.domain,
 } as const;
 
 export const TWITTER_CONFIG = {
