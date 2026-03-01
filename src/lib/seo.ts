@@ -24,7 +24,7 @@ export const SITE_METADATA = {
   locale: "ko_KR",
   type: "website",
   image: "/avatar.jpg",
-  ogImage: "/avatar.jpg",
+  ogImage: "/og_image.jpg",
   baseUrl: SITE_CONFIG.domain,
 } as const;
 
