@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { HighlightedText } from "../HighlightedText";
 import { PostCardTag } from "./PostCardTag";
 import { Post } from "@/lib/posts";
+import Link from "next/link";
 
 interface PostCardProps {
   post: Post;
@@ -19,9 +20,10 @@ interface PostCardProps {
 
 export function PostCard({ post, searchTerm = "" }: PostCardProps) {
   const router = useRouter();
+  const href = `/posts/${post.slug}`;
 
   const handleCardClick = () => {
-    router.push(`/posts/${post.slug}`);
+    router.push(href);
   };
 
   return (
@@ -35,12 +37,21 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
             <CardDescription className="text-neutral-400 mb-2 text-sm font-medium">
               {formatDate(post.date)} • {post.readingTime}분 읽기
             </CardDescription>
+
             <CardTitle className="text-neutral-100 text-2xl mb-3 font-semibold leading-tight line-clamp-2">
-              <HighlightedText text={post.title} searchTerm={searchTerm} />
+              <Link
+                href={href}
+                className="hover:underline underline-offset-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <HighlightedText text={post.title} searchTerm={searchTerm} />
+              </Link>
             </CardTitle>
+
             <p className="text-neutral-300 text-base leading-relaxed line-clamp-4">
               <HighlightedText text={post.excerpt} searchTerm={searchTerm} />
             </p>
+
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4">
                 {post.tags.map((tag) => (
