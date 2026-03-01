@@ -1,7 +1,6 @@
 ---
 date: "2025-11-01T00:00:00+09:00"
 title: "안전한 자동 저장 모듈 설계하기"
-slug: "implement-auto-save-module"
 tags: ["React", "Typescript"]
 keywords: ["frontend", "react", "typescript", "프론트엔드", "리액트", "타입스크립트", "자동저장", "Form"]
 comments: true

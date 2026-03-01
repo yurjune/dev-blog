@@ -1,7 +1,6 @@
 ---
 date: "2026-02-06T00:00:00+09:00"
 title: "Rust로 양방향 연결리스트 구현하기(with Rc, Weak, RefCell)"
-slug: "rust-doubly-linked-list"
 tags: ["Rust", "자료구조"]
 keywords: ["자료구조", "data structure", "러스트", "Rust", "연결 리스트", "linked list", "RefCell", "Rc"]
 comments: false 

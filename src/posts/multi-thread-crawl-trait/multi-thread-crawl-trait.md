@@ -1,7 +1,6 @@
 ---
 date: "2026-01-17T00:00:00+09:00"
 title: "Rust로 멀티 스레드 크롤러 만들기(2) - Trait로 크롤링 패턴 추상화"
-slug: "multi-thread-crawl-trait"
 image: ""
 tags: ["Rust"]
 keywords: ["러스트", "Rust", "트레이트", "trait", "크롤링", "Crawling", "추상화", "인터페이스"]

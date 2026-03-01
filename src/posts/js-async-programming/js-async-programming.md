@@ -1,7 +1,6 @@
 ---
 date: "2026-02-06T00:00:00+09:00"
 title: "자바스크립트는 싱글 스레드인데 어떻게 동시성을 구현할까?"
-slug: "js-async-programming"
 tags: ["Javascript"]
 keywords: ["자바스크립트", "javascript", "이벤트 루프", "Event loop", "태스크 큐", "비동기", "동시성", "async"]
 comments: false 
