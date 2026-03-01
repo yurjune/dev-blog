@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import markdownToText from "markdown-to-text";
 import { getReadingTime } from ".";
-import { Post } from "../interface/post";
+import { AdjacentPosts, Post } from "../interface/post";
 import { parsePostMatter } from "../matter";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
@@ -115,11 +115,6 @@ export function getPostExcerpt(
   }
 
   return result.trim() || fallback;
-}
-
-export interface AdjacentPosts {
-  prev: { slug: string; title: string } | null;
-  next: { slug: string; title: string } | null;
 }
 
 export function getAdjacentPosts(currentSlug: string): AdjacentPosts {

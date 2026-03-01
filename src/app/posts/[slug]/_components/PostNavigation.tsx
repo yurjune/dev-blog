@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ReactNode } from "react";
+import { AdjacentPosts } from "@/lib/interface/post";
 
-interface PostNavigationProps {
-  prev: { slug: string; title: string } | null;
-  next: { slug: string; title: string } | null;
-}
-
-export function PostNavigation({ prev, next }: PostNavigationProps) {
+export function PostNavigation({ prev, next }: AdjacentPosts) {
   if (!prev && !next) {
     return null;
   }

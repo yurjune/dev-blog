@@ -9,3 +9,8 @@ export interface Post {
   keywords?: string[];
   draft?: boolean;
 }
+
+export interface AdjacentPosts {
+  prev: { slug: string; title: string } | null;
+  next: { slug: string; title: string } | null;
+}
