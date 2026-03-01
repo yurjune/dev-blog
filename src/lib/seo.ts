@@ -12,8 +12,6 @@ export const SITE_METADATA = {
     "프론트엔드 개발자 제리의 기술 블로그입니다. React, Next.js, TypeScript 등 웹 개발 관련 기술과 경험을 공유합니다.",
   author: "Jerry",
   locale: "ko_KR",
-  image: "/avatar.jpg",
-  ogImage: "/og_image.jpg",
   keywords: [
     "프론트엔드",
     "백엔드",
@@ -25,6 +23,12 @@ export const SITE_METADATA = {
     "JavaScript",
     "Programming",
   ],
+  favicon: "/favicon.ico",
+  image: "/avatar.jpg",
+  ogImage: "/og_image.jpg",
+  manifestIcon192: "/android-chrome-192x192.png",
+  manifestIcon512: "/android-chrome-512x512.png",
+  appleIcon: "/apple-touch-icon.png",
 } as const;
 
 export const TWITTER_CONFIG = {
