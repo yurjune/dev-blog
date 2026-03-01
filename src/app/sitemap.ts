@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { getSortedPostsData } from "@/lib/posts";
 import { SITE_METADATA } from "@/lib/constants";
+import { getGitLastCommitIsoDate } from "@/lib/git";
+import path from "path";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
@@ -18,13 +20,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const posts = getSortedPostsData();
-  const postPages = posts.map((post) => ({
-    url: `${SITE_METADATA.baseUrl}/posts/${post.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 1,
-  }));
+  const postPages = getSortedPostsData().map((post) => {
+    const lastModified = new Date(
+      getGitLastCommitIsoDate(
+        path.join("src/posts", post.slug, `${post.slug}.md`),
+      ) || post.date,
+    );
+
+    return {
+      url: `${SITE_METADATA.baseUrl}/posts/${post.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 1,
+    };
+  });
 
   return [...staticPages, ...postPages];
 }
