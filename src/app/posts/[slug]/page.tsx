@@ -15,12 +15,17 @@ import { SITE_METADATA } from "@/lib/seo";
 import { TableOfContents } from "@/components/TableOfContents";
 import { ProfileSection } from "@/components/ProfileSection";
 import { extractHeadings } from "@/lib/toc";
+import { cache } from "react";
 
 interface PostPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+const getCachedPostMarkdown = cache(async (slug: string) => {
+  return getPostMarkdown(slug);
+});
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
@@ -32,7 +37,7 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
   try {
     const { slug } = await params;
-    const post = await getPostMarkdown(slug);
+    const post = await getCachedPostMarkdown(slug);
 
     const postUrl = `${SITE_METADATA.baseUrl}/posts/${slug}`;
 
@@ -67,7 +72,7 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PostPageProps) {
   try {
     const { slug } = await params;
-    const post = await getPostMarkdown(slug);
+    const post = await getCachedPostMarkdown(slug);
     const adjacentPosts = getAdjacentPosts(slug);
 
     return (
