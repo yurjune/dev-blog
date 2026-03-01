@@ -145,3 +145,10 @@ export function getAdjacentPosts(currentSlug: string): AdjacentPosts {
 
   return { prev, next };
 }
+
+export function getPostImage(
+  name: string | undefined,
+  slug: string,
+): string | null {
+  return name ? `/posts/${slug}/${name}` : null;
+}

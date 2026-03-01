@@ -2,6 +2,7 @@ import {
   getPostMarkdown,
   getAllPostSlugs,
   getAdjacentPosts,
+  getPostImage,
 } from "@/lib/utils/posts";
 import { Post } from "@/lib/interface/post";
 import { notFound } from "next/navigation";
@@ -11,7 +12,7 @@ import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
 import { Tag } from "@/components/tag/Tag";
 import { PostNavigation } from "@/app/posts/[slug]/_components/PostNavigation";
 import { Metadata } from "next";
-import { SITE_METADATA } from "@/lib/seo";
+import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/seo";
 import { TableOfContents } from "@/components/TableOfContents";
 import { ProfileSection } from "@/components/ProfileSection";
 import { extractHeadings } from "@/lib/toc";
@@ -38,28 +39,32 @@ export async function generateMetadata({
   try {
     const { slug } = await params;
     const post = await getCachedPostMarkdown(slug);
-
     const postUrl = `${SITE_METADATA.baseUrl}/posts/${slug}`;
+    const postImage = getPostImage(post.image, slug) ?? SITE_METADATA.ogImage;
 
     return {
-      title: post.title,
-      description: post.excerpt,
-      keywords: post.keywords || [],
       alternates: {
         canonical: postUrl,
       },
+      title: post.title,
+      description: post.excerpt,
+      keywords: post.keywords || [],
       openGraph: {
+        url: postUrl,
+        type: "article",
+        locale: SITE_METADATA.locale,
+        siteName: SITE_METADATA.siteName,
         title: post.title,
         description: post.excerpt,
-        type: "article",
-        url: postUrl,
+        images: [postImage],
         publishedTime: post.date,
         tags: post.tags,
-        // authors: [SITE_METADATA.author],
       },
       twitter: {
+        card: TWITTER_CONFIG.card,
         title: post.title,
         description: post.excerpt,
+        images: [postImage],
       },
     };
   } catch {

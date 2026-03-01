@@ -10,7 +10,6 @@ export const SITE_METADATA = {
   title: "Jerry's Dev Blog",
   description:
     "프론트엔드 개발자 Jerry의 기술 블로그입니다. React, Next.js, TypeScript 등 웹 개발 관련 기술과 경험을 공유합니다.",
-  shortDescription: "프론트엔드 개발자 Jerry의 기술 블로그입니다.",
   keywords: [
     "프론트엔드",
     "웹개발",
@@ -25,6 +24,7 @@ export const SITE_METADATA = {
   locale: "ko_KR",
   type: "website",
   image: "/avatar.jpg",
+  ogImage: "/avatar.jpg",
   baseUrl: SITE_CONFIG.domain,
 } as const;
 

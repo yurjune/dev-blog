@@ -5,6 +5,7 @@ export interface Post {
   excerpt: string;
   slug: string;
   readingTime: number;
+  image?: string;
   tags?: string[];
   keywords?: string[];
   draft?: boolean;
