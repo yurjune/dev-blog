@@ -1,6 +1,6 @@
 import {
   getPostMarkdown,
-  getAllPostIds,
+  getAllPostSlugs,
   getAdjacentPosts,
   Post,
 } from "@/lib/posts";
@@ -18,23 +18,23 @@ import { ProfileSection } from "@/components/ProfileSection";
 
 interface PostPageProps {
   params: Promise<{
-    id: string;
+    slug: string;
   }>;
 }
 
 export async function generateStaticParams() {
-  const ids = getAllPostIds();
-  return ids.map((id) => ({ id }));
+  const slugs = getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
   try {
-    const { id } = await params;
-    const post = await getPostMarkdown(id);
+    const { slug } = await params;
+    const post = await getPostMarkdown(slug);
 
-    const postUrl = `${SITE_METADATA.baseUrl}/posts/${id}`;
+    const postUrl = `${SITE_METADATA.baseUrl}/posts/${slug}`;
 
     return {
       title: post.title,
@@ -66,9 +66,9 @@ export async function generateMetadata({
 
 export default async function PostPage({ params }: PostPageProps) {
   try {
-    const { id } = await params;
-    const post = await getPostMarkdown(id);
-    const adjacentPosts = getAdjacentPosts(id);
+    const { slug } = await params;
+    const post = await getPostMarkdown(slug);
+    const adjacentPosts = getAdjacentPosts(slug);
 
     return (
       <div className="flex-col py-4">

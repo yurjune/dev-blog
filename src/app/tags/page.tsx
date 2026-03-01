@@ -47,7 +47,7 @@ export default async function TagsPage() {
 
           <div className="space-y-4">
             {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.slug} post={post} />
             ))}
           </div>
         </section>

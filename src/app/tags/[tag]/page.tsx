@@ -83,7 +83,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
           <div className="space-y-4">
             {filteredPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.slug} post={post} />
             ))}
           </div>
         </section>

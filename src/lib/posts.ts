@@ -5,7 +5,6 @@ import { getReadingTime } from "./utils";
 import matter from "gray-matter";
 
 export interface Post {
-  id: string;
   title: string;
   date: string;
   content: string;
@@ -37,7 +36,7 @@ export function parsePostMatter(fileContents: string) {
   };
 }
 
-export function processImagePaths(content: string, postId: string): string {
+export function processImagePaths(content: string, postSlug: string): string {
   // ![alt](image.png) 형태의 이미지 태그를 찾아서 절대 경로로 변환
   return content.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
@@ -47,12 +46,12 @@ export function processImagePaths(content: string, postId: string): string {
         return match;
       }
       // 상대 경로인 경우 절대 경로로 변환
-      return `![${alt}](/posts/${postId}/${imagePath})`;
+      return `![${alt}](/posts/${postSlug}/${imagePath})`;
     },
   );
 }
 
-export function getAllPostIds(): string[] {
+export function getAllPostSlugs(): string[] {
   const fileNames = fs.readdirSync(postsDirectory);
 
   const isDirectory = (fileName: string) => {
@@ -85,7 +84,6 @@ export function getSortedPostsData(): Post[] {
 
       return {
         ...matterResult.data,
-        id: fileName,
         slug: fileName,
         readingTime: getReadingTime(matterResult.content),
         content: matterResult.content,
@@ -99,19 +97,18 @@ export function getSortedPostsData(): Post[] {
   });
 }
 
-export async function getPostMarkdown(id: string): Promise<Post> {
-  const fullPath = path.join(postsDirectory, id, `${id}.md`);
+export async function getPostMarkdown(slug: string): Promise<Post> {
+  const fullPath = path.join(postsDirectory, slug, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = parsePostMatter(fileContents);
-  const processedMarkdown = processImagePaths(matterResult.content, id);
+  const processedMarkdown = processImagePaths(matterResult.content, slug);
   const excerpt =
     matterResult.data.excerpt || getPostExcerpt(matterResult.content);
 
   return {
     ...matterResult.data,
-    id,
-    slug: id,
+    slug,
     content: processedMarkdown,
     excerpt,
     readingTime: getReadingTime(matterResult.content),

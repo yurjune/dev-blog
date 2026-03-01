@@ -60,7 +60,7 @@ export function Search({ initialPosts }: SearchProps) {
         ) : (
           filteredPosts.map((post) => (
             <PostCard
-              key={post.id}
+              key={post.slug}
               post={post}
               searchTerm={debouncedSearchTerm}
             />
