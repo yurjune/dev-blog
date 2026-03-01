@@ -1,40 +1,11 @@
 import fs from "fs";
 import path from "path";
 import markdownToText from "markdown-to-text";
-import { getReadingTime } from "./utils";
-import matter from "gray-matter";
-
-export interface Post {
-  title: string;
-  date: string;
-  content: string;
-  excerpt: string;
-  slug: string;
-  readingTime: number;
-  tags?: string[];
-  keywords?: string[];
-  draft?: boolean;
-}
-
-export interface PostMeta {
-  title: string;
-  date: string;
-  excerpt?: string;
-  tags?: string[];
-  keywords?: string[];
-  draft?: boolean;
-  [key: string]: string | number | boolean | string[] | undefined;
-}
+import { getReadingTime } from ".";
+import { Post } from "../interface/post";
+import { parsePostMatter } from "../matter";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
-
-export function parsePostMatter(fileContents: string) {
-  const res = matter(fileContents);
-  return {
-    ...res,
-    data: res.data as PostMeta,
-  };
-}
 
 export function processImagePaths(content: string, postSlug: string): string {
   // ![alt](image.png) 형태의 이미지 태그를 찾아서 절대 경로로 변환

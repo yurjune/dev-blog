@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
-import { getSortedPostsData } from "@/lib/posts";
-import { SITE_METADATA } from "@/lib/constants";
-import { getGitLastCommitIsoDate } from "@/lib/git";
+import { getSortedPostsData } from "@/lib/utils/posts";
+import { SITE_METADATA } from "@/lib/seo";
+import { getGitLastCommitIsoDate } from "@/lib/utils/git";
 import path from "path";
 
 export default function sitemap(): MetadataRoute.Sitemap {

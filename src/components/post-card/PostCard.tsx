@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { HighlightedText } from "../HighlightedText";
 import { PostCardTag } from "./PostCardTag";
-import { Post } from "@/lib/posts";
+import { Post } from "@/lib/interface/post";
 import Link from "next/link";
 
 interface PostCardProps {

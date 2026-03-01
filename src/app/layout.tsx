@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
 import ScrollToTopBtn from "@/components/ScrollToTop";
-import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/constants";
+import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

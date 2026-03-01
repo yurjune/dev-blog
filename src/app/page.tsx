@@ -1,4 +1,4 @@
-import { getSortedPostsData } from "@/lib/posts";
+import { getSortedPostsData } from "@/lib/utils/posts";
 import { PostCard } from "@/components/post-card/PostCard";
 import { PageHeader } from "@/components/header/PageHeader";
 import { Metadata } from "next";

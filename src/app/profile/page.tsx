@@ -2,7 +2,7 @@ import { getProfileData } from "@/lib/profile";
 import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
 import { PageHeader } from "@/components/header/PageHeader";
 import { Metadata } from "next";
-import { SITE_METADATA } from "@/lib/constants";
+import { SITE_METADATA } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: `Profile`,

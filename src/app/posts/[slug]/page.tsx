@@ -2,8 +2,8 @@ import {
   getPostMarkdown,
   getAllPostSlugs,
   getAdjacentPosts,
-  Post,
-} from "@/lib/posts";
+} from "@/lib/utils/posts";
+import { Post } from "@/lib/interface/post";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -11,10 +11,10 @@ import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
 import { Tag } from "@/components/tag/Tag";
 import { PostNavigation } from "@/components/PostNavigation";
 import { Metadata } from "next";
-import { SITE_METADATA } from "@/lib/constants";
+import { SITE_METADATA } from "@/lib/seo";
 import { TableOfContents } from "@/components/TableOfContents";
-import { extractHeadings } from "@/lib/toc";
 import { ProfileSection } from "@/components/ProfileSection";
+import { extractHeadings } from "@/lib/toc";
 
 interface PostPageProps {
   params: Promise<{

@@ -1,6 +1,6 @@
 import { Search } from "@/components/Search";
 import { Metadata } from "next";
-import { getSortedPostsData } from "@/lib/posts";
+import { getSortedPostsData } from "@/lib/utils/posts";
 
 export const metadata: Metadata = {
   title: `Search`,

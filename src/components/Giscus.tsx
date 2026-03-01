@@ -1,6 +1,6 @@
 "use client";
 
-import { GISCUS_CONFIG } from "@/lib/constants";
+import { GISCUS_CONFIG } from "@/lib/giscus";
 import { useEffect } from "react";
 
 declare global {
