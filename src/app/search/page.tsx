@@ -1,4 +1,4 @@
-import { Search } from "@/components/Search";
+import { Search } from "@/app/search/_components/Search";
 import { Metadata } from "next";
 import { getSortedPostsData } from "@/lib/utils/posts";
 

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
 import { Tag } from "@/components/tag/Tag";
-import { PostNavigation } from "@/components/PostNavigation";
+import { PostNavigation } from "@/app/posts/[slug]/_components/PostNavigation";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/seo";
 import { TableOfContents } from "@/components/TableOfContents";

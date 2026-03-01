@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { Search as SearchIcon } from "lucide-react";
 import { Input } from "@/components/shadcn-ui/input";
 import { PostCard } from "@/components/post-card/PostCard";
-import { PageHeader } from "@/components/header/PageHeader";
+import { PageHeader } from "@/components/PageHeader";
 import { Post } from "@/lib/interface/post";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 
