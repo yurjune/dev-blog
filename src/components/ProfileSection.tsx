@@ -1,7 +1,8 @@
-import { Github, Mail, User } from "lucide-react";
+import { Mail, User } from "lucide-react";
 import { MY_INFO } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
+import { Github } from "./icons/Github";
 
 export function ProfileSection() {
   return (
@@ -33,6 +34,7 @@ export function ProfileSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+              aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
             </a>

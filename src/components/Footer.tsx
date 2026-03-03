@@ -1,6 +1,7 @@
-import { Github, Mail, User } from "lucide-react";
+import { Mail, User } from "lucide-react";
 import { MY_INFO } from "@/lib/seo";
 import Link from "next/link";
+import { Github } from "./icons/Github";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
