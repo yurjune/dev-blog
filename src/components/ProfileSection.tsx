@@ -30,23 +30,25 @@ export function ProfileSection() {
 
           <div className="flex gap-4">
             <a
+              className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
               href={MY_INFO.github}
+              aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-              aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
             </a>
             <a
-              href={`mailto:${MY_INFO.email}`}
               className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+              href={`mailto:${MY_INFO.email}`}
+              aria-label="Email"
             >
               <Mail className="h-5 w-5" />
             </a>
             <Link
-              href="/profile"
               className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+              href="/profile"
+              aria-label="Profile"
             >
               <User className="h-5 w-5" />
             </Link>

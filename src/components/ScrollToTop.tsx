@@ -24,10 +24,11 @@ export default function ScrollToTopBtn() {
 
   return (
     <button
-      onClick={scrollToTop}
       className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 rounded-full bg-neutral-500/50 p-2.5 text-white shadow-lg transition-opacity hover:bg-slate-600/70 ${
         isVisible ? "opacity-100" : "pointer-events-none opacity-0"
       } cursor-pointer`}
+      aria-label="Scroll to Top"
+      onClick={scrollToTop}
     >
       <ArrowUp className="h-5.5 w-5.5" />
     </button>

@@ -68,7 +68,11 @@ export default function Header() {
 
           {/* 모바일 메뉴 버튼 */}
           <div className="sm:hidden">
-            <HeaderButton onClick={toggleMenu} className="h-10 w-10">
+            <HeaderButton
+              className="h-10 w-10"
+              aria-label="Toggle Mobile GNB"
+              onClick={toggleMenu}
+            >
               {isMenuOpen ? (
                 <X className="h-5 w-5" />
               ) : (
