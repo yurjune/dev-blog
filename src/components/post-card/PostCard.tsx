@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardDescription,
@@ -7,7 +5,6 @@ import {
   CardTitle,
 } from "@/components/shadcn-ui/card";
 import { formatDate } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { HighlightedText } from "../HighlightedText";
 import { PostCardTag } from "./PostCardTag";
 import { Post } from "@/lib/interface/post";
@@ -19,18 +16,16 @@ interface PostCardProps {
 }
 
 export function PostCard({ post, searchTerm = "" }: PostCardProps) {
-  const router = useRouter();
   const href = `/posts/${post.slug}`;
 
-  const handleCardClick = () => {
-    router.push(href);
-  };
-
   return (
-    <Card
-      className="bg-neutral-800/50 border-neutral-700/50 hover:bg-neutral-700/50 hover:border-neutral-600/50 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm cursor-pointer"
-      onClick={handleCardClick}
-    >
+    <Card className="relative bg-neutral-800/50 border-neutral-700/50 hover:bg-neutral-700/50 hover:border-neutral-600/50 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
+      <Link
+        href={href}
+        aria-label={post.title}
+        className="absolute inset-0 z-10"
+      />
+
       <CardHeader style={{ gap: 0 }}>
         <div className="flex justify-between items-start">
           <div className="flex-1">
@@ -39,13 +34,7 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
             </CardDescription>
 
             <CardTitle className="text-neutral-100 text-2xl mb-3 font-semibold leading-tight line-clamp-2">
-              <Link
-                href={href}
-                className="hover:underline underline-offset-4"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <HighlightedText text={post.title} searchTerm={searchTerm} />
-              </Link>
+              <HighlightedText text={post.title} searchTerm={searchTerm} />
             </CardTitle>
 
             <p className="text-neutral-300 text-base leading-relaxed line-clamp-4">
@@ -53,12 +42,11 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
             </p>
 
             {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="relative z-20 flex flex-wrap gap-2 mt-4">
                 {post.tags.map((tag) => (
                   <PostCardTag
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    onClick={(e) => e.stopPropagation()}
                   >
                     <HighlightedText text={tag} searchTerm={searchTerm} />
                   </PostCardTag>

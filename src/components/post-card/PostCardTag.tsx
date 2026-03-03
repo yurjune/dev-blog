@@ -23,5 +23,9 @@ export function PostCardTag({ href, children, onClick }: PostCardTagProps) {
     );
   }
 
-  return <span className={className}>{children}</span>;
+  return (
+    <span className={className} onClick={onClick}>
+      {children}
+    </span>
+  );
 }
