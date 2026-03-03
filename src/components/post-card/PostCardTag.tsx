@@ -17,7 +17,12 @@ export function PostCardTag({ href, children, onClick }: PostCardTagProps) {
 
   if (href) {
     return (
-      <Link href={href} className={className} onClick={onClick}>
+      <Link
+        href={href}
+        className={className}
+        onClick={onClick}
+        style={{ color: "inherit", textDecoration: "none" }}
+      >
         {children}
       </Link>
     );
