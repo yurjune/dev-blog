@@ -7,17 +7,45 @@ import { parsePostMatter } from "../matter";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
+function isRelativeAssetPath(assetPath: string): boolean {
+  return !(
+    assetPath.startsWith("http") ||
+    assetPath.startsWith("/") ||
+    assetPath.startsWith("#") ||
+    assetPath.startsWith("data:") ||
+    assetPath.startsWith("mailto:") ||
+    assetPath.startsWith("tel:")
+  );
+}
+
+function toPostAssetPath(assetPath: string, postSlug: string): string {
+  const normalizedPath = assetPath.replace(/^\.\//, "");
+  return path.posix.join("/posts", postSlug, normalizedPath);
+}
+
 export function processImagePaths(content: string, postSlug: string): string {
   // ![alt](image.png) 형태의 이미지 태그를 찾아서 절대 경로로 변환
-  return content.replace(
+  const markdownImageConverted = content.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
     (match, alt, imagePath) => {
       // 이미 절대 경로인 경우 그대로 유지
-      if (imagePath.startsWith("http") || imagePath.startsWith("/")) {
+      if (!isRelativeAssetPath(imagePath)) {
         return match;
       }
       // 상대 경로인 경우 절대 경로로 변환
-      return `![${alt}](/posts/${postSlug}/${imagePath})`;
+      return `![${alt}](${toPostAssetPath(imagePath, postSlug)})`;
+    },
+  );
+
+  // <video>/<source>/<img>의 src도 상대 경로면 포스트 기준 절대 경로로 변환
+  return markdownImageConverted.replace(
+    /<(video|source|img)\b([^>]*?)\ssrc=(['"])([^'"]+)\3([^>]*)>/g,
+    (match, tagName, beforeSrc, quote, src, afterSrc) => {
+      if (!isRelativeAssetPath(src)) {
+        return match;
+      }
+      const absoluteSrc = toPostAssetPath(src, postSlug);
+      return `<${tagName}${beforeSrc} src=${quote}${absoluteSrc}${quote}${afterSrc}>`;
     },
   );
 }
