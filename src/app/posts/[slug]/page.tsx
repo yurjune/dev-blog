@@ -17,6 +17,7 @@ import { TableOfContents } from "@/components/TableOfContents";
 import { ProfileSection } from "@/components/ProfileSection";
 import { extractHeadings } from "@/lib/toc";
 import { cache } from "react";
+import { formatDate } from "@/lib/utils";
 
 interface PostPageProps {
   params: Promise<{
@@ -134,12 +135,6 @@ const GoBackNavigator = ({ href, text }: { href: string; text: string }) => {
 };
 
 const Header = ({ post }: { post: Post }) => {
-  const date = new Date(post.date).toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
   return (
     <header>
       <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -148,7 +143,7 @@ const Header = ({ post }: { post: Post }) => {
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="text-gray-400 text-sm">
-          {date} • {post.readingTime}분 읽기
+          {formatDate(post.date)} • {post.readingTime}분 읽기
         </div>
 
         {post.tags && post.tags.length > 0 && (

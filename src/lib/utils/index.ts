@@ -1,7 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import readingTime from "reading-time";
 import { twMerge } from "tailwind-merge";
-import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,6 +12,11 @@ export function getReadingTime(content: string): number {
 }
 
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return format(date, "yyyy년 MM월 dd일");
+  // ex) 2026년 2월 6일
+  return new Date(dateString).toLocaleDateString("ko-KR", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
