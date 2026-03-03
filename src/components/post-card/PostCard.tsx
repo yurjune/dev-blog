@@ -22,6 +22,7 @@ export function PostCard({ post, searchTerm = "" }: PostCardProps) {
     <Card className="relative bg-neutral-800/50 border-neutral-700/50 hover:bg-neutral-700/50 hover:border-neutral-600/50 transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm">
       <Link
         href={href}
+        prefetch={false}
         aria-label={post.title}
         className="absolute inset-0 z-10"
       />
