@@ -1,17 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/shadcn-ui/navigation-menu";
-import { HeaderButton } from "@/components/header/HeaderButton";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/shadcn-ui/button";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,28 +41,25 @@ export default function Header() {
           </div>
 
           {/* 데스크톱 네비게이션 */}
-          <NavigationMenu className="hidden sm:block">
-            <NavigationMenuList>
-              {menuItems.map((item) => (
-                <NavigationMenuItem key={item.name}>
-                  <NavigationMenuLink
-                    asChild
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent text-gray-300 hover:text-white hover:bg-neutral-800 text-base",
-                    )}
-                  >
-                    <Link href={item.href}>{item.name}</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <nav className="hidden sm:flex items-center gap-1">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="inline-flex h-9 items-center justify-center rounded-md px-4 text-base text-gray-300 transition-colors hover:bg-neutral-800 hover:text-white"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 
           {/* 모바일 메뉴 버튼 */}
           <div className="sm:hidden">
-            <HeaderButton
-              className="h-10 w-10"
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md text-gray-300 transition-colors hover:bg-neutral-800 hover:text-white"
               aria-label="Toggle Mobile GNB"
               onClick={toggleMenu}
             >
@@ -78,7 +68,7 @@ export default function Header() {
               ) : (
                 <Menu className="h-5 w-5" />
               )}
-            </HeaderButton>
+            </Button>
           </div>
         </div>
 
@@ -110,14 +100,15 @@ export default function Header() {
 
 function useHeaderVisibility() {
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const shouldHide = currentScrollY > lastScrollY && currentScrollY > 100;
+      const shouldHide =
+        currentScrollY > lastScrollY.current && currentScrollY > 100;
       setIsVisible(!shouldHide);
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -125,7 +116,7 @@ function useHeaderVisibility() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]);
+  }, []);
 
   return isVisible;
 }
