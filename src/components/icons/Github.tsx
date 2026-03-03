@@ -2,6 +2,7 @@ interface GithubProps {
   className?: string;
 }
 
+// from lucide-react
 export const Github = ({ className }: GithubProps) => {
   return (
     <svg
