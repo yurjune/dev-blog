@@ -45,7 +45,7 @@ export default function Footer() {
             <p className="text-gray-400 text-sm">
               © {currentYear} {MY_INFO.name}. All rights reserved.
             </p>
-            <p className="text-gray-500 text-xs mt-2 flex items-center justify-center gap-1">
+            <p className="text-gray-400 text-xs mt-2 flex items-center justify-center gap-1">
               Made with Next.js
             </p>
           </div>
