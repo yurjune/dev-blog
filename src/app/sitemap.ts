@@ -4,6 +4,8 @@ import { SITE_METADATA } from "@/lib/seo";
 import { getGitLastCommitIsoDate } from "@/lib/utils/git";
 import path from "path";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     {

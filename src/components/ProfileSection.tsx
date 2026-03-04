@@ -1,9 +1,7 @@
 import { Mail, User } from "lucide-react";
 import { MY_INFO } from "@/lib/seo";
 import Link from "next/link";
-import Image from "next/image";
 import { Github } from "./icons/Github";
-import avatarImage from "../../public/avatar.jpg";
 
 export function ProfileSection() {
   return (
@@ -11,8 +9,8 @@ export function ProfileSection() {
       <div className="flex flex-row items-center gap-6">
         <div className="shrink-0">
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden">
-            <Image
-              src={avatarImage}
+            <img
+              src={"/avatar.jpg"}
               alt="Profile Avatar"
               width={96}
               height={96}
