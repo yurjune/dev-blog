@@ -53,6 +53,12 @@ export const metadata: Metadata = {
     shortcut: SITE_METADATA.favicon,
     apple: SITE_METADATA.appleIcon,
   },
+  verification: {
+    google: "-PTFxN8mb9dN7DggEZ-9yoeqq2CjeUH4rB50VCD776s",
+    other: {
+      "naver-site-verification": "4e347d3eb22eac0cc4f4607b8551450a0c7a9a50",
+    },
+  },
 };
 
 export default function RootLayout({
