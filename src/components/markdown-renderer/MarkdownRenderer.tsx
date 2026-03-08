@@ -1,5 +1,3 @@
-"use client";
-
 import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
