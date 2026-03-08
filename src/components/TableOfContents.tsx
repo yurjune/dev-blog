@@ -34,13 +34,6 @@ export function TableOfContents({ items }: TableOfContentsProps) {
     return () => observer.disconnect();
   }, [items]);
 
-  const handleTeleport = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "instant",
-      block: "start",
-    });
-  };
-
   if (items.length === 0) {
     return null;
   }
@@ -62,10 +55,6 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                   ? "text-blue-400 font-medium"
                   : "text-gray-400"
               }`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleTeleport(item.id);
-              }}
             >
               {item.text}
             </a>
