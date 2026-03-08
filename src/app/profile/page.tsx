@@ -1,8 +1,10 @@
-import { getProfileData } from "@/lib/profile";
 import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
 import { PageHeader } from "@/components/PageHeader";
 import { Metadata } from "next";
 import { SITE_METADATA } from "@/lib/seo";
+import fs from "fs";
+import path from "path";
+import { parsePostMatter } from "@/lib/matter";
 
 export const metadata: Metadata = {
   title: `Profile`,
@@ -24,7 +26,9 @@ export const metadata: Metadata = {
 };
 
 export default async function ProfilePage() {
-  const profile = await getProfileData();
+  const fullPath = path.join(process.cwd(), "src/profile/profile.md");
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const matterResult = parsePostMatter(fileContents);
 
   return (
     <div className="max-w-content mx-auto px-4 py-4">
@@ -32,7 +36,7 @@ export default async function ProfilePage() {
         <PageHeader title="Profile" />
 
         <article className="prose prose-invert prose-lg max-w-none">
-          <MarkdownRenderer content={profile.content} />
+          <MarkdownRenderer content={matterResult.content} />
         </article>
       </div>
     </div>
