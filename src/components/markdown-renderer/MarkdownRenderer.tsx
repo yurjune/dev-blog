@@ -2,13 +2,7 @@ import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from "./CodeBlock";
-
-function extractId(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s가-힣-]/g, "")
-    .replace(/\s+/g, "-");
-}
+import HeadingWithAnchor from "./HeadingWithAnchor";
 
 interface MarkdownRendererProps {
   content: string;
@@ -48,45 +42,33 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {children}
       </a>
     ),
-    h1: ({ children, ...props }) => {
-      const text = String(children);
-      const id = extractId(text);
-      return (
-        <h1
-          id={id}
-          className="text-3xl font-bold text-white mb-4 mt-8 scroll-mt-20"
-          {...props}
-        >
-          {children}
-        </h1>
-      );
-    },
-    h2: ({ children, ...props }) => {
-      const text = String(children);
-      const id = extractId(text);
-      return (
-        <h2
-          id={id}
-          className="text-2xl font-bold text-white mb-4 mt-6 scroll-mt-20"
-          {...props}
-        >
-          {children}
-        </h2>
-      );
-    },
-    h3: ({ children, ...props }) => {
-      const text = String(children);
-      const id = extractId(text);
-      return (
-        <h3
-          id={id}
-          className="text-xl font-semibold text-white mb-3 mt-5 scroll-mt-20"
-          {...props}
-        >
-          {children}
-        </h3>
-      );
-    },
+    h1: ({ children, ...props }) => (
+      <HeadingWithAnchor
+        level="h1"
+        className="text-3xl font-bold text-white mb-4 mt-8 scroll-mt-20"
+        {...props}
+      >
+        {children}
+      </HeadingWithAnchor>
+    ),
+    h2: ({ children, ...props }) => (
+      <HeadingWithAnchor
+        level="h2"
+        className="text-2xl font-bold text-white mb-4 mt-6 scroll-mt-20"
+        {...props}
+      >
+        {children}
+      </HeadingWithAnchor>
+    ),
+    h3: ({ children, ...props }) => (
+      <HeadingWithAnchor
+        level="h3"
+        className="text-xl font-semibold text-white mb-3 mt-5 scroll-mt-20"
+        {...props}
+      >
+        {children}
+      </HeadingWithAnchor>
+    ),
     p: ({ children, ...props }) => (
       <p className="text-white leading-[1.72] mb-5 last:mb-0" {...props}>
         {children}
