@@ -14,10 +14,8 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/prismjs": "^1.26.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.522.0",
     "markdown-to-text": "^0.1.1",
@@ -29,12 +27,8 @@
     "reading-time": "^1.5.0",
     "rehype-raw": "^7.0.0",
     "remark": "^15.0.1",
-    "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
-    "remark-slug": "^7.0.1",
-    "remark-toc": "^9.0.0",
-    "striptags": "^3.2.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
@@ -43,6 +37,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
+    "@types/prismjs": "^1.26.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitest/coverage-v8": "^4.0.18",
