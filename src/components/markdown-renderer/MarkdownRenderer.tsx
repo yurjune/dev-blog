@@ -37,7 +37,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </CodeBlock>
       );
     },
-    // 링크 스타일링
     a: ({ children, href, ...props }) => (
       <a
         href={href}
@@ -49,7 +48,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {children}
       </a>
     ),
-    // 제목 스타일링
     h1: ({ children, ...props }) => {
       const text = String(children);
       const id = extractId(text);
@@ -89,13 +87,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         </h3>
       );
     },
-    // 단락 스타일링
     p: ({ children, ...props }) => (
       <p className="text-white leading-[1.72] mb-5 last:mb-0" {...props}>
         {children}
       </p>
     ),
-    // 리스트 스타일링
     ul: ({ children, ...props }) => (
       <ul className="list-disc pl-6 text-white mb-4" {...props}>
         {children}
@@ -111,7 +107,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {children}
       </li>
     ),
-    // 인용구 스타일링
     blockquote: ({ children, ...props }) => (
       <blockquote
         className="border-l-4 border-neutral-600 bg-neutral-800 p-4 italic text-gray-400 mb-4"
@@ -120,7 +115,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {children}
       </blockquote>
     ),
-    // 이미지 스타일링
     img: ({ src, alt, ...props }) => (
       <img
         src={src}
@@ -129,7 +123,6 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         {...props}
       />
     ),
-    // 테이블 스타일링
     table: ({ children, ...props }) => (
       <div className="overflow-x-auto mb-4">
         <table
