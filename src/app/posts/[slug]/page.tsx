@@ -76,50 +76,53 @@ export async function generateMetadata({
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  let post: Post;
+
   try {
     const { slug } = await params;
-    const post = await getCachedPostMarkdown(slug);
-    const adjacentPosts = getAdjacentPosts(slug);
-
-    return (
-      <div className="flex-col py-4">
-        <div className="max-w-content mx-auto px-4 mb-4">
-          <div className="mb-4">
-            <GoBackNavigator href="/" text="홈으로 돌아가기" />
-          </div>
-
-          <Header post={post} />
-        </div>
-
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-4">
-          <div className="hidden xl:block" />
-
-          <div className="max-w-content mx-auto w-full px-4">
-            <article className="prose prose-invert prose-lg max-w-none mb-8">
-              <MarkdownRenderer content={post.content} />
-            </article>
-
-            <div className="h-px bg-neutral-700 mb-8" />
-
-            <div className="mb-6">
-              <PostNavigation
-                prev={adjacentPosts.prev}
-                next={adjacentPosts.next}
-              />
-            </div>
-
-            <ProfileSection />
-          </div>
-
-          <div className="hidden xl:block w-44">
-            <TableOfContents items={extractHeadings(post.content)} />
-          </div>
-        </div>
-      </div>
-    );
+    post = await getCachedPostMarkdown(slug);
   } catch {
     notFound();
   }
+
+  const adjacentPosts = getAdjacentPosts(post.slug);
+
+  return (
+    <div className="flex-col py-4">
+      <div className="max-w-content mx-auto px-4 mb-4">
+        <div className="mb-4">
+          <GoBackNavigator href="/" text="홈으로 돌아가기" />
+        </div>
+
+        <Header post={post} />
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-4">
+        <div className="hidden xl:block" />
+
+        <div className="max-w-content mx-auto w-full px-4">
+          <article className="prose prose-invert prose-lg max-w-none mb-8">
+            <MarkdownRenderer content={post.content} />
+          </article>
+
+          <div className="h-px bg-neutral-700 mb-8" />
+
+          <div className="mb-6">
+            <PostNavigation
+              prev={adjacentPosts.prev}
+              next={adjacentPosts.next}
+            />
+          </div>
+
+          <ProfileSection />
+        </div>
+
+        <div className="hidden xl:block w-44">
+          <TableOfContents items={extractHeadings(post.content)} />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const GoBackNavigator = ({ href, text }: { href: string; text: string }) => {
