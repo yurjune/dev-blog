@@ -6,10 +6,7 @@ import {
 } from "@/lib/utils/posts";
 import { Post } from "@/lib/interface/post";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import MarkdownRenderer from "@/components/markdown-renderer/MarkdownRenderer";
-import { Tag } from "@/components/tag/Tag";
 import { PostNavigation } from "@/app/posts/[slug]/_components/PostNavigation";
 import { Metadata } from "next";
 import { SITE_METADATA, TWITTER_CONFIG } from "@/lib/seo";
@@ -17,13 +14,8 @@ import { TableOfContents } from "@/components/TableOfContents";
 import { ProfileSection } from "@/components/ProfileSection";
 import { extractHeadings } from "@/lib/toc";
 import { cache } from "react";
-import { formatDate } from "@/lib/utils";
-
-interface PostPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+import { GoBackNavigator } from "./_components/GoBackNavigator";
+import { PostHeader } from "./_components/PostHeader";
 
 const getCachedPostMarkdown = cache(async (slug: string) => {
   return getPostMarkdown(slug);
@@ -32,6 +24,12 @@ const getCachedPostMarkdown = cache(async (slug: string) => {
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+interface PostPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 export async function generateMetadata({
@@ -94,7 +92,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <GoBackNavigator href="/" text="홈으로 돌아가기" />
         </div>
 
-        <Header post={post} />
+        <PostHeader post={post} />
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-4">
@@ -124,45 +122,3 @@ export default async function PostPage({ params }: PostPageProps) {
     </div>
   );
 }
-
-const GoBackNavigator = ({ href, text }: { href: string; text: string }) => {
-  return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-    >
-      <ArrowLeft className="h-4 w-4" />
-      {text}
-    </Link>
-  );
-};
-
-const Header = ({ post }: { post: Post }) => {
-  return (
-    <header>
-      <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-        {post.title}
-      </h1>
-
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-        <div className="text-gray-400 text-sm">
-          {formatDate(post.date)} • {post.readingTime}분 읽기
-        </div>
-
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => {
-              const href = `/tags/${encodeURIComponent(tag)}`;
-
-              return (
-                <Tag key={tag} href={href} size="small">
-                  {tag}
-                </Tag>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </header>
-  );
-};
