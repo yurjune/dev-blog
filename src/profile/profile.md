@@ -36,5 +36,5 @@ comments: false
 
 ### Contact
 
-- Email : yurjune@naver.com
-- Github : https://github.com/yurjune
+- Email : [yurjune@naver.com](mailto:yurjune@naver.com)
+- Github : [https://github.com/yurjune](https://github.com/yurjune)
