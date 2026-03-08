@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npm run copy-images && next dev",
     "build": "npm run copy-images && next build",
+    "analyze": "next experimental-analyze",
     "start": "next start",
     "lint": "eslint .",
     "copy-images": "node scripts/copy-images.js",
