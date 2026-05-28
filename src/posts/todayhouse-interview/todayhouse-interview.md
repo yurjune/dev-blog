@@ -1,6 +1,6 @@
 ---
 date: "2026-05-28T00:00:00+09:00"
-title: "오늘의집 프론트엔드 면접 후기(feat. 최종 탈락)"
+title: "오늘의집 프론트엔드 면접 후기(최종 탈락)"
 image: "document.png"
 tags: ["Interview"]
 keywords: ["오늘의집", "버킷플레이스", "bucketplace", "면접", "후기", "라이브코딩", "코딩 테스트"]
